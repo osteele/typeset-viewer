@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a problem with Typeset Preview
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. If you opened this from **Help ▸ Report a Bug…** in the app,
+        your environment details are already filled in below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What went wrong, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+  - type: input
+    id: document-type
+    attributes:
+      label: Document type
+      description: Typst, Markdown, LaTeX, or PDF (and anything notable about the file)
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: App version, macOS version, and resolved tools. The app fills this in automatically.
+      placeholder: |
+        - Typeset Preview: 0.0.0 (build 0)
+        - macOS: Version 14.x
+        - Architecture: arm64
+        - Typst: bundled
+        - Pandoc: /opt/homebrew/bin/pandoc
+        - latexmk: /Library/TeX/texbin/latexmk
+    validations:
+      required: true

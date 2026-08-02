@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Website
+    url: https://typeset.osteele.com
+    about: Features, screenshots, and downloads.
+  - name: Email the developer
+    url: mailto:steele@osteele.com
+    about: For anything you'd rather not file as a public issue.

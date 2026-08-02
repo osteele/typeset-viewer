@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typeset Preview — a native macOS viewer for Typst, Markdown &amp; LaTeX</title>
+<meta name="description" content="Typeset Preview renders Typst, Markdown, and LaTeX to PDF and shows them in a fast native macOS window, with live refresh, notes, review tools, and presentation mode.">
+<meta property="og:title" content="Typeset Preview">
+<meta property="og:description" content="A native macOS preview and review tool for Typst, Markdown, LaTeX, and PDF.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://typeset.osteele.com/">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f5f2;
+    --card: #ffffff;
+    --border: #e6e3dc;
+    --fg: #1d1d1f;
+    --fg-soft: #55534e;
+    --accent: #b1550f;
+    --accent-fg: #ffffff;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17161a;
+      --bg-soft: #1f1e23;
+      --card: #232128;
+      --border: #35323b;
+      --fg: #f3f1ec;
+      --fg-soft: #b7b3ab;
+      --accent: #e6903f;
+      --accent-fg: #1a1206;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 76px 0 40px; text-align: center; }
+  .badge {
+    display: inline-block; font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--fg-soft); border: 1px solid var(--border); border-radius: 999px;
+    padding: 5px 12px; margin-bottom: 22px;
+  }
+  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.05; margin: 0 0 16px; letter-spacing: -.02em; }
+  .lede { font-size: clamp(17px, 2.6vw, 21px); color: var(--fg-soft); max-width: 640px; margin: 0 auto 30px; }
+  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
+    padding: 13px 22px; border-radius: 12px; background: var(--accent); color: var(--accent-fg);
+    box-shadow: var(--shadow); transition: transform .06s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn.secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); box-shadow: none; }
+  .req { font-size: 14px; color: var(--fg-soft); margin-top: 14px; }
+
+  .shot {
+    margin: 44px auto 0; border-radius: var(--radius); border: 1px solid var(--border);
+    background: var(--bg-soft); box-shadow: var(--shadow); overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+  /* Placeholder until real screenshots are dropped into assets/ */
+  .shot .placeholder {
+    aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+    color: var(--fg-soft); font-size: 14px; text-align: center; padding: 24px;
+  }
+
+  section { padding: 56px 0; border-top: 1px solid var(--border); }
+  section h2 { font-size: clamp(24px, 4vw, 32px); margin: 0 0 8px; letter-spacing: -.01em; }
+  section .sub { color: var(--fg-soft); margin: 0 0 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .feature {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px 20px 22px;
+  }
+  .feature h3 { margin: 0 0 6px; font-size: 17px; }
+  .feature p { margin: 0; color: var(--fg-soft); font-size: 15px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .step { font-size: 15px; color: var(--fg-soft); }
+  .step b { color: var(--fg); display: block; margin-bottom: 4px; font-size: 16px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
+    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+
+  footer { padding: 40px 0 64px; border-top: 1px solid var(--border); color: var(--fg-soft); font-size: 14px; text-align: center; }
+  footer a { color: var(--fg-soft); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">Native macOS app</span>
+    <h1>Typeset Preview</h1>
+    <p class="lede">Open a Typst, Markdown, or LaTeX file and read it as a clean PDF — rendered instantly, refreshed as you edit, with notes, review tools, and presentation mode built in.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/osteele/typeset-preview/releases/latest">Download for macOS</a>
+      <a class="btn secondary" href="#features">See what it does</a>
+    </div>
+    <p class="req">Free · macOS 13 or later · Apple silicon · notarized by Apple</p>
+
+    <div class="shot">
+      <!-- Replace with assets/screenshot-main.png (a document open in the viewer). -->
+      <div class="placeholder">Screenshot: a document rendered in Typeset Preview</div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <h2>One window for every document you read</h2>
+    <p class="sub">Typeset Preview renders sources with local tools and shows the result with native PDF display.</p>
+    <div class="grid">
+      <div class="feature">
+        <h3>Typst, Markdown, LaTeX &amp; PDF</h3>
+        <p>Typst renders with the bundled <code>typst</code>; Markdown with Pandoc; LaTeX with <code>latexmk</code>. PDFs open directly.</p>
+      </div>
+      <div class="feature">
+        <h3>Live refresh</h3>
+        <p>Edit the source in your own editor and the preview re-renders on save, keeping your place on the page.</p>
+      </div>
+      <div class="feature">
+        <h3>Navigable sidebar</h3>
+        <p>Move through long documents with page thumbnails, a table of contents, a figures-and-tables index, and a citation list.</p>
+      </div>
+      <div class="feature">
+        <h3>Document review</h3>
+        <p>Run focused checks — readability, citation coverage, proofreading, prose tightening — as reviewable suggestions.</p>
+      </div>
+      <div class="feature">
+        <h3>Reading list</h3>
+        <p>Collect papers to return to, add them by arXiv ID or URL, and open, search, or export the list.</p>
+      </div>
+      <div class="feature">
+        <h3>Presentation mode</h3>
+        <p>Turn any rendered document into slides with page-fit navigation and an optional iPhone remote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Getting started</h2>
+    <p class="sub">Typst is bundled; the other renderers use tools you may already have.</p>
+    <div class="steps">
+      <div class="step"><b>1 · Download &amp; open</b>Drag the app to Applications. It's notarized, so it opens without security warnings.</div>
+      <div class="step"><b>2 · Open a file</b>Open a <code>.typ</code>, <code>.md</code>, <code>.tex</code>, or <code>.pdf</code> — from Finder, drag-and-drop, or File&nbsp;&gt;&nbsp;Open.</div>
+      <div class="step"><b>3 · Add renderers (optional)</b>Markdown needs <code>pandoc</code>; LaTeX needs <code>latexmk</code>. The app tells you if one is missing.</div>
+      <div class="step"><b>4 · Stay current</b>The app checks for updates on its own and installs them in place.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <a href="https://github.com/osteele/typeset-preview/releases/latest">Download</a> ·
+      <a href="https://github.com/osteele/typeset-preview/issues/new?labels=bug">Report a bug</a> ·
+      <a href="mailto:steele@osteele.com">Email</a> ·
+      <a href="https://github.com/osteele/typeset-preview/blob/main/LICENSE">License</a>
+    </p>
+    <p>© 2026 Oliver Steele. Includes Typst, licensed under Apache-2.0.</p>
+  </div>
+</footer>
+</body>
+</html>
