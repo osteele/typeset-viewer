@@ -3,174 +3,397 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Typeset Viewer — a native macOS viewer for Typst, Markdown &amp; LaTeX</title>
-<meta name="description" content="Typeset Viewer renders Typst, Markdown, and LaTeX to PDF and shows them in a fast native macOS window, with live refresh, notes, review tools, and presentation mode.">
+<meta name="description" content="Typeset Viewer renders Typst, Markdown, and LaTeX to PDF in a native macOS window. Read, annotate, review, and quiz yourself on papers without leaving the document.">
 <meta property="og:title" content="Typeset Viewer">
-<meta property="og:description" content="A native macOS preview and review tool for Typst, Markdown, LaTeX, and PDF.">
+<meta property="og:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF—with notes, review tools, and source-backed paper quizzes.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://typeset.osteele.com/">
+<meta property="og:image" content="https://typeset.osteele.com/assets/og-quiz.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Typeset Viewer">
+<meta name="twitter:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF—with notes, review tools, and source-backed paper quizzes.">
+<meta name="twitter:image" content="https://typeset.osteele.com/assets/og-quiz.png">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg-soft: #f6f5f2;
-    --card: #ffffff;
-    --border: #e6e3dc;
-    --fg: #1d1d1f;
-    --fg-soft: #55534e;
-    --accent: #b1550f;
-    --accent-fg: #ffffff;
-    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06);
-    --radius: 14px;
+    --bg: #fffff8;
+    --fg: #14130f;
+    --fg-soft: #4a473f;
+    --fg-mute: #8b877c;
+    --rule: #ddd9cc;
+    --accent: #7a3c12;
+    --measure: 36rem;
+    --note: 12.5rem;
+    /* text + gutter + margin column */
+    --full: 50rem;
+    /* --full plus the article's horizontal padding */
+    --block: 53rem;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #17161a;
-      --bg-soft: #1f1e23;
-      --card: #232128;
-      --border: #35323b;
-      --fg: #f3f1ec;
-      --fg-soft: #b7b3ab;
-      --accent: #e6903f;
-      --accent-fg: #1a1206;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(0,0,0,.35);
+      --bg: #26241f;
+      --fg: #d2ccbd;
+      --fg-soft: #a9a396;
+      --fg-mute: #837e72;
+      --rule: #3d3a32;
+      --accent: #d19c66;
     }
   }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
+
   body {
     margin: 0;
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--fg);
     background: var(--bg);
-  }
-  a { color: var(--accent); }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-  header { padding: 76px 0 40px; text-align: center; }
-  .badge {
-    display: inline-block; font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
-    color: var(--fg-soft); border: 1px solid var(--border); border-radius: 999px;
-    padding: 5px 12px; margin-bottom: 22px;
-  }
-  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.05; margin: 0 0 16px; letter-spacing: -.02em; }
-  .lede { font-size: clamp(17px, 2.6vw, 21px); color: var(--fg-soft); max-width: 640px; margin: 0 auto 30px; }
-  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
-  .btn {
-    display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
-    padding: 13px 22px; border-radius: 12px; background: var(--accent); color: var(--accent-fg);
-    box-shadow: var(--shadow); transition: transform .06s ease;
-  }
-  .btn:active { transform: translateY(1px); }
-  .btn.secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); box-shadow: none; }
-  .req { font-size: 14px; color: var(--fg-soft); margin-top: 14px; }
-
-  .shot {
-    margin: 44px auto 0; border-radius: var(--radius); border: 1px solid var(--border);
-    background: var(--bg-soft); box-shadow: var(--shadow); overflow: hidden;
-  }
-  .shot img { display: block; width: 100%; height: auto; }
-  /* Placeholder until real screenshots are dropped into assets/ */
-  .shot .placeholder {
-    aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
-    color: var(--fg-soft); font-size: 14px; text-align: center; padding: 24px;
+    color: var(--fg);
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-size: 19px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
   }
 
-  section { padding: 56px 0; border-top: 1px solid var(--border); }
-  section h2 { font-size: clamp(24px, 4vw, 32px); margin: 0 0 8px; letter-spacing: -.01em; }
-  section .sub { color: var(--fg-soft); margin: 0 0 28px; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .feature {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 20px 20px 22px;
+  article {
+    max-width: var(--block);
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 3rem;
+    counter-reset: section sn;
   }
-  .feature h3 { margin: 0 0 6px; font-size: 17px; }
-  .feature p { margin: 0; color: var(--fg-soft); font-size: 15px; }
 
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-  .step { font-size: 15px; color: var(--fg-soft); }
-  .step b { color: var(--fg); display: block; margin-bottom: 4px; font-size: 16px; }
-  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
-    background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+  h1, h2, p, dl, ul, ol, .byline, .get-row, .req, .signature {
+    max-width: var(--measure);
+  }
 
-  footer { padding: 40px 0 64px; border-top: 1px solid var(--border); color: var(--fg-soft); font-size: 14px; text-align: center; }
+  h1 {
+    font-size: clamp(2.1rem, 6vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -.015em;
+    margin: 0 0 .35rem;
+    font-weight: 600;
+  }
+
+  .byline { margin: 0 0 .55rem; color: var(--fg-mute); font-size: .95rem; font-style: italic; }
+  .byline a { color: inherit; }
+
+  .jump { margin: 0 0 2rem; font-size: .85rem; color: var(--fg-mute); max-width: var(--measure); }
+  .jump a { color: var(--fg-soft); }
+
+  .lede { font-size: 1.12rem; margin: 0 0 2rem; }
+
+  /* Download */
+  .get-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 1.1rem; margin: 0 0 .9rem; }
+  .get {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--fg);
+    border: 1px solid var(--fg);
+    border-radius: 3px;
+    padding: .5rem 1.1rem;
+    transition: background-color .12s ease, color .12s ease;
+  }
+  .get:hover { background: var(--fg); color: var(--bg); }
+  .get-meta { font-size: .88rem; color: var(--fg-mute); }
+  .get-meta a { color: inherit; }
+  .req { font-size: .88rem; color: var(--fg-soft); margin: 0 0 2.5rem; }
+
+  /* Figures */
+  figure { margin: 1.2rem 0 1.8rem; max-width: var(--measure); }
+  figure img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--rule); border-radius: 3px;
+  }
+  figcaption { font-size: .8rem; color: var(--fg-mute); margin-top: .55rem; max-width: var(--measure); }
+  /* clear:right — a figure this wide reaches into the margin column, so it must
+     not slide under a sidenote or margin figure */
+  figure.wide { width: var(--full); max-width: none; clear: right; }
+  figure.mid { max-width: 30rem; }
+  header > figure { width: var(--full); max-width: none; margin: 0 0 3rem; }
+
+  /* Small UI details, set in the right margin beside the text they describe.
+     These are section children, so the margin column is already inside the
+     containing block — unlike .sidenote, which sits in a <p> capped at --measure
+     and has to be pulled out of it. */
+  figure.mfig {
+    float: right; clear: right;
+    width: var(--note); max-width: var(--note);
+    margin: .3rem 0 1.4rem 0;
+  }
+  figure.mfig figcaption { font-size: .75rem; margin-top: .35rem; }
+
+  /* Sections */
+  section { margin: 0 0 3rem; counter-increment: section; }
+  section::after { content: ""; display: block; clear: both; }
+  section > h2 {
+    font-size: 1.28rem; font-weight: 600; letter-spacing: -.005em;
+    margin: 0 0 .9rem; padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+    max-width: var(--full);
+  }
+  section > h2::before {
+    content: counter(section);
+    color: var(--fg-mute);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    margin-right: .8rem;
+  }
+  p { margin: 0 0 1.1rem; }
+
+  .signature { color: var(--fg-mute); font-style: italic; font-size: .95rem; }
+  .signature a { color: inherit; }
+
+  /* Grouped feature list */
+  dl { margin: 0; }
+  dt { font-weight: 600; margin: 1.15rem 0 .1rem; font-size: .95rem; }
+  dt:first-of-type { margin-top: 0; }
+  dd { margin: 0; color: var(--fg-soft); font-size: .95rem; }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .84em;
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
+    border-radius: 2px;
+    /* kept tight: wider padding leaves a visible gap before following
+       punctuation, which is frequent now that these appear in running prose */
+    padding: .1em .24em;
+  }
+
+  /* Sidenotes */
+  .sn-ref { counter-increment: sn; }
+  .sn-ref::after {
+    content: counter(sn); vertical-align: super; font-size: .68em;
+    color: var(--accent); margin-left: .1em;
+  }
+  .sidenote {
+    float: right; clear: right;
+    width: var(--note);
+    margin: .25rem calc(-1 * (var(--note) + 1.5rem)) 1rem 0;
+    font-size: .8rem; line-height: 1.5; color: var(--fg-mute);
+  }
+  .sidenote::before {
+    content: counter(sn); vertical-align: super; font-size: .68em;
+    color: var(--accent); margin-right: .3em;
+  }
+  .sidenote code { font-size: .95em; }
+
+  @media (max-width: 900px) {
+    .sidenote {
+      float: none; display: block; width: auto;
+      margin: .7rem 0 1.1rem 1.2rem;
+      padding-left: .9rem;
+      border-left: 1px solid var(--rule);
+    }
+    /* These are small captures. Stretching them to the full column upscales
+       them 1.6-2.2x, so keep them near the size they were taken at. */
+    figure.mfig {
+      float: none; width: auto; max-width: 15rem;
+      margin: 1.2rem 0 1.8rem;
+    }
+    figure.wide, figure.mid { width: 100%; max-width: 100%; }
+  }
+
+  footer {
+    max-width: var(--full);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.4rem;
+    font-size: .85rem; color: var(--fg-mute);
+  }
+  footer p { margin: 0 0 .5rem; max-width: none; }
   footer a { color: var(--fg-soft); }
+
+  @media (max-width: 600px) {
+    body { font-size: 18px; }
+    article { padding-top: 3rem; }
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <span class="badge">Native macOS app</span>
+<article>
+
+  <header>
     <h1>Typeset Viewer</h1>
-    <p class="lede">Open a Typst, Markdown, or LaTeX file and read it as a clean PDF — rendered instantly, refreshed as you edit, with notes, review tools, and presentation mode built in.</p>
-    <div class="cta">
-      <a class="btn" href="https://github.com/osteele/typeset-preview/releases/latest">Download for macOS</a>
-      <a class="btn secondary" href="#features">See what it does</a>
-    </div>
-    <p class="req">Free · macOS 13 or later · Apple silicon · notarized by Apple</p>
+    <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX — by <a href="https://osteele.com">Oliver Steele</a></p>
+    <nav class="jump"><a href="#features">Features</a> · <a href="#installing">Installing</a> · <a href="#bugs">Bugs</a></nav>
 
-    <div class="shot">
-      <!-- Replace with assets/screenshot-main.png (a document open in the viewer). -->
-      <div class="placeholder">Screenshot: a document rendered in Typeset Viewer</div>
-    </div>
-  </div>
-</header>
+    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF. It re-renders when you save, and keeps your place on the page.</p>
 
-<section id="features">
-  <div class="wrap">
-    <h2>One window for every document you read</h2>
-    <p class="sub">Typeset Viewer renders sources with local tools and shows the result with native PDF display.</p>
-    <div class="grid">
-      <div class="feature">
-        <h3>Typst, Markdown, LaTeX &amp; PDF</h3>
-        <p>Typst renders with the bundled <code>typst</code>; Markdown with Pandoc; LaTeX with <code>latexmk</code>. PDFs open directly.</p>
-      </div>
-      <div class="feature">
-        <h3>Live refresh</h3>
-        <p>Edit the source in your own editor and the preview re-renders on save, keeping your place on the page.</p>
-      </div>
-      <div class="feature">
-        <h3>Navigable sidebar</h3>
-        <p>Move through long documents with page thumbnails, a table of contents, a figures-and-tables index, and a citation list.</p>
-      </div>
-      <div class="feature">
-        <h3>Document review</h3>
-        <p>Run focused checks — readability, citation coverage, proofreading, prose tightening — as reviewable suggestions.</p>
-      </div>
-      <div class="feature">
-        <h3>Reading list</h3>
-        <p>Collect papers to return to, add them by arXiv ID or URL, and open, search, or export the list.</p>
-      </div>
-      <div class="feature">
-        <h3>Presentation mode</h3>
-        <p>Turn any rendered document into slides with page-fit navigation and an optional iPhone remote.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Getting started</h2>
-    <p class="sub">Typst is bundled; the other renderers use tools you may already have.</p>
-    <div class="steps">
-      <div class="step"><b>1 · Download &amp; open</b>Drag the app to Applications. It's notarized, so it opens without security warnings.</div>
-      <div class="step"><b>2 · Open a file</b>Open a <code>.typ</code>, <code>.md</code>, <code>.tex</code>, or <code>.pdf</code> — from Finder, drag-and-drop, or File&nbsp;&gt;&nbsp;Open.</div>
-      <div class="step"><b>3 · Add renderers (optional)</b>Markdown needs <code>pandoc</code>; LaTeX needs <code>latexmk</code>. The app tells you if one is missing.</div>
-      <div class="step"><b>4 · Stay current</b>The app checks for updates on its own and installs them in place.</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>
-      <a href="https://github.com/osteele/typeset-preview/releases/latest">Download</a> ·
-      <a href="https://github.com/osteele/typeset-preview/issues/new?labels=bug">Report a bug</a> ·
-      <a href="mailto:steele@osteele.com">Email</a> ·
-      <a href="https://github.com/osteele/typeset-preview/blob/main/LICENSE">License</a>
+    <p class="get-row">
+      <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
+      <span class="get-meta">Version 0.7.2 · 2 August 2026 · <a href="https://github.com/osteele/typeset-viewer/releases">release notes</a></span>
     </p>
-    <p>© 2026 Oliver Steele. Includes Typst, licensed under Apache-2.0.</p>
-  </div>
-</footer>
+    <p class="req">Free. Requires macOS 13 or later on Apple silicon. Signed and notarized, so it opens without a security warning.</p>
+
+    <figure>
+      <img src="assets/screenshot-main.png" width="2000" height="1309"
+           alt="A Typst paper rendered in Typeset Viewer, with the table of contents sidebar showing numbered sections.">
+      <figcaption>A Typst source file, rendered and open at the table of contents.</figcaption>
+    </figure>
+  </header>
+
+  <section id="why">
+    <h2>Why it exists</h2>
+
+    <p>I like to edit a LaTeX file in one window and watch it refresh in another. So I wrote an app for that.</p>
+
+    <p>It doesn't edit anything — you keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">By running <code>latexmk</code>, <code>typst</code>, or Pandoc — the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
+
+    <figure class="wide">
+      <img src="assets/crop-chart.png" width="1650" height="610" loading="lazy"
+           alt="A rendered bar chart with a numbered figure caption below it.">
+      <figcaption>Figures, tables, and mathematics as the renderer produced them — the layout isn't re-implemented.</figcaption>
+    </figure>
+
+    <p>It also works for Typst. (I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.)</p>
+
+    <figure class="mid">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/crop-status-sm.png" width="880" height="53">
+        <img src="assets/crop-status.png" width="1110" height="53" loading="lazy"
+             alt="Status bar reading: adaptive-quadrature.typ, rendered in 2.54 seconds at 18:09:02.">
+      </picture>
+      <figcaption>What was rendered, how long it took, and when.</figcaption>
+    </figure>
+
+    <p>Also, there's a PDF icon in the title bar. Drag it to the Finder, or into a mail message. It saves the step where you export a PDF and then go looking for wherever it went.</p>
+
+    <figure class="mfig">
+      <img src="assets/crop-switcher.png" width="308" height="66" loading="lazy"
+           alt="A five-segment control for switching what the sidebar shows.">
+    </figure>
+
+    <figure class="mfig">
+      <img src="assets/crop-thumbnail.png" width="434" height="334" loading="lazy"
+           alt="A page thumbnail labelled Page 1, with the heading that starts it.">
+      <figcaption>Thumbnails carry the heading each page starts with.</figcaption>
+    </figure>
+
+    <figure class="mfig">
+      <img src="assets/crop-toc.png" width="434" height="397" loading="lazy"
+           alt="A table of contents sidebar listing numbered sections and subsections.">
+      <figcaption>From the renderer, or from the PDF itself.</figcaption>
+    </figure>
+
+    <figure class="mfig">
+      <img src="assets/crop-figures.png" width="434" height="186" loading="lazy"
+           alt="An index listing Figure 1 and Table 1 with their captions and page numbers.">
+    </figure>
+
+    <p>Also, windows have a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes — all five for LaTeX and Typst, the first two for Markdown. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
+
+    <p>(Oh, right — it also does Markdown.)</p>
+
+    <figure class="mfig">
+      <img src="assets/crop-reference.png" width="434" height="118" loading="lazy"
+           alt="A reference entry with Semantic Scholar and arXiv links and a count of citations.">
+    </figure>
+
+    <p>Each work cited gets links to its Semantic Scholar and arXiv pages, and a count of the places in your paper that cite it. And you can add it to a reading list.</p>
+
+    <p>(Oh, right — there's a reading list.)</p>
+
+    <figure class="mfig">
+      <img src="assets/crop-note.png" width="434" height="202" loading="lazy"
+           alt="A note card showing the quoted text and the comment attached to it.">
+      <figcaption>The note keeps its quote.</figcaption>
+    </figure>
+
+    <p>Also you can highlight a passage and attach a note to it. The note remembers the words it was attached to rather than a position on the page, so it stays where it belongs after you rewrite the paragraph above it. Notes come along when you export or print.</p>
+
+    <figure class="mid">
+      <img src="assets/crop-highlight-sm.png" width="730" height="56" loading="lazy"
+           alt="A phrase highlighted within a paragraph of the rendered document.">
+      <figcaption>Because the note stores the text, it survives the next render.</figcaption>
+    </figure>
+
+    <p>Also there's a panel on the other side of the window that you can talk to. Ask it about the document you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+
+    <p>Or turn that panel into a quiz. It asks a question grounded in the paper, keeps the answer hidden until you're ready, and schedules the question again from your Again, Hard, Good, or Easy rating. Every card links back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
+
+    <figure class="mid">
+      <img src="assets/crop-toolbar.png" width="955" height="73" loading="lazy"
+           alt="The document toolbar: export, zoom controls, agent, annotate, select, review, and presentation buttons.">
+      <figcaption>Export, zoom, the review panel, annotation, and presentation.</figcaption>
+    </figure>
+
+    <p>Also you can open a paper by pasting a URL, if it's arXiv or a PDF. It downloads it and keeps a copy.</p>
+
+    <p>Or by pasting a link to an Overleaf project, if you've switched that project on for git. The app clones the repository, builds from that, and can push back.</p>
+
+    <p>Also there's a presentation mode, so you can write a talk in Beamer or Typst and then actually give it, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span> Or just present a PDF.</p>
+
+    <p>Also there are some other things.</p>
+
+    <p class="signature">— Oliver Steele</p>
+  </section>
+
+  <section id="features">
+    <h2>Features</h2>
+    <dl>
+      <dt>Formats</dt>
+      <dd>Typst · LaTeX · Markdown · PDFs opened directly</dd>
+
+      <dt>Rendering</dt>
+      <dd>Renders again when you save · follows includes and <code>.bib</code> files · keeps your place on the page · builds in a temporary directory, leaving no <code>.aux</code> files behind</dd>
+
+      <dt>Sidebar</dt>
+      <dd>Page thumbnails · table of contents · figures and tables · works cited · notes</dd>
+
+      <dt>Works cited</dt>
+      <dd>Semantic Scholar and arXiv links · the pages that cite each entry · add to reading list</dd>
+
+      <dt>Notes</dt>
+      <dd>Attached to the text rather than to a position · survive the next render · included when you export or print</dd>
+
+      <dt>Review panel</dt>
+      <dd>Proofreading · tightening · readability · citation coverage · questions about the document · edits arrive as cards to accept or reject · Claude Code or Codex · off until you set it up</dd>
+
+      <dt>Paper quizzes</dt>
+      <dd>Source-backed recall questions · answers hidden until revealed · Again, Hard, Good, and Easy review scheduling · page and passage links · persistent progress</dd>
+
+      <dt>Opening</dt>
+      <dd>Files · arXiv IDs and URLs · PDF URLs, downloaded and cached · Overleaf projects over git, with pull, push, and sync</dd>
+
+      <dt>Presenting</dt>
+      <dd>Page-fit slides · contact sheet · phone as remote over a QR code · laser pointer · Tailscale when the network won't cooperate</dd>
+
+      <dt>Getting the PDF out</dt>
+      <dd>Drag the title-bar icon · export · print, with the notes · <code>--render</code> from a script</dd>
+
+      <dt>Housekeeping</dt>
+      <dd>Reopens what you had open · updates itself · <code>--doctor</code> reports which tools it found</dd>
+    </dl>
+  </section>
+
+  <section id="installing">
+    <h2>Installing</h2>
+    <p>Unzip the download and drag <b>Typeset Viewer</b> to your Applications folder. Typst is bundled, so <code>.typ</code> files work immediately.</p>
+    <p>The other formats use tools you may already have: Markdown needs Pandoc,<span class="sn-ref"></span><span class="sidenote"><code>brew install pandoc</code></span> LaTeX needs <code>latexmk</code>,<span class="sn-ref"></span><span class="sidenote">Install MacTeX or the smaller BasicTeX.</span> and Overleaf sync needs <code>git</code>. The app says so when one is missing, and <code>--doctor</code> prints everything it resolved.</p>
+    <p>It updates itself through <a href="https://sparkle-project.org">Sparkle</a> — or use <b>Check for Updates…</b> in the app menu.</p>
+  </section>
+
+  <section id="bugs">
+    <h2>Bugs and feedback</h2>
+    <p>This is a one-person project and it is still before 1.0, so expect rough edges. Reports are genuinely welcome; I read all of them.</p>
+    <p><a href="https://github.com/osteele/typeset-viewer/issues/new?labels=bug">Report a bug</a>, or use <b>Help ▸ Report a Bug…</b> in the app, which fills in your version and environment for you. For anything else, <a href="mailto:steele@osteele.com">email me</a>.</p>
+    <p>Typeset Viewer is free but closed-source. The repository behind this page holds the releases, the issue tracker, and this page itself — not the application source.</p>
+  </section>
+
+  <footer>
+    <p>
+      <a href="https://github.com/osteele/typeset-viewer/releases/latest">Download</a> ·
+      <a href="https://github.com/osteele/typeset-viewer/releases">Release notes</a> ·
+      <a href="https://github.com/osteele/typeset-viewer/issues/new?labels=bug">Report a bug</a> ·
+      <a href="mailto:steele@osteele.com">Email</a> ·
+      <a href="https://github.com/osteele/typeset-viewer/blob/main/LICENSE">License</a>
+    </p>
+    <p>© 2026 Oliver Steele. Bundles Typst, licensed under Apache-2.0.</p>
+  </footer>
+
+</article>
 </body>
 </html>

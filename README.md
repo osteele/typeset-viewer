@@ -2,7 +2,7 @@
 
 A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** files. Open a supported file and it renders to a PDF and displays it in a fast native window — with live refresh, notes, review tools, a reading list, and presentation mode.
 
-**Website:** [typeset.osteele.com](https://typeset.osteele.com) · **Download:** [latest release](https://github.com/osteele/typeset-preview/releases/latest)
+**Website:** [typeset.osteele.com](https://typeset.osteele.com) · **Download:** [latest release](https://github.com/osteele/typeset-viewer/releases/latest)
 
 > This repository hosts the app's **releases, website, and issue tracker**. Typeset Viewer is free but closed-source; the application source is not included here.
 
@@ -10,7 +10,7 @@ A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** f
 
 ## Install
 
-1. Download the latest `.zip` from [Releases](https://github.com/osteele/typeset-preview/releases/latest).
+1. Download the latest `.zip` from [Releases](https://github.com/osteele/typeset-viewer/releases/latest).
 2. Unzip and drag **Typeset Viewer** to your Applications folder.
 3. Open it. The app is notarized by Apple, so it launches without security warnings.
 
@@ -22,6 +22,7 @@ A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** f
 - **Live refresh** — edit the source in your own editor and the preview re-renders on save, preserving your reading position.
 - **Notes & highlights** — annotate rendered text and export notes with context.
 - **Document review** — readability, citation coverage, proofreading, and prose-tightening checks as reviewable suggestions.
+- **Paper quizzes** — source-backed recall questions with spaced review, persistent progress, and links to each supporting passage.
 - **Reading list** — collect papers by arXiv ID or URL; open, search, or export them.
 - **Presentation mode** — page-fit slide navigation with an optional iPhone remote.
 
@@ -31,7 +32,7 @@ Typeset Viewer updates itself using [Sparkle](https://sparkle-project.org). Use 
 
 ## Feedback & bug reports
 
-- **Report a bug:** [open an issue](https://github.com/osteele/typeset-preview/issues/new?labels=bug), or use **Help ▸ Report a Bug…** in the app (it pre-fills your version and environment).
+- **Report a bug:** [open an issue](https://github.com/osteele/typeset-viewer/issues/new?labels=bug), or use **Help ▸ Report a Bug…** in the app (it pre-fills your version and environment).
 - **Email:** [steele@osteele.com](mailto:steele@osteele.com)
 
 ## License
