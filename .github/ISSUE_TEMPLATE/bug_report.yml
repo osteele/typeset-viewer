@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a problem with Typeset Preview
+description: Report a problem with Typeset Viewer
 labels: ["bug"]
 body:
   - type: markdown
@@ -33,7 +33,7 @@ body:
       label: Environment
       description: App version, macOS version, and resolved tools. The app fills this in automatically.
       placeholder: |
-        - Typeset Preview: 0.0.0 (build 0)
+        - Typeset Viewer: 0.0.0 (build 0)
         - macOS: Version 14.x
         - Architecture: arm64
         - Typst: bundled

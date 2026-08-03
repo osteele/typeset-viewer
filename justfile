@@ -1,4 +1,4 @@
-# Typeset Preview — public site, releases, and issue tracker.
+# Typeset Viewer — public site, releases, and issue tracker.
 # The landing page (site/) deploys to typeset.osteele.com via Cloudflare Pages.
 
 project := "typeset-preview"
