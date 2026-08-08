@@ -126,6 +126,33 @@
   }
   figure.mfig figcaption { font-size: .75rem; margin-top: .35rem; }
 
+  /* Substantial feature captures get the full text-plus-margin measure. The
+     copy stays first in the DOM so narrow layouts read naturally. */
+  .feature-row {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    width: var(--full);
+    max-width: none;
+    clear: both;
+    margin: 2rem 0 2.7rem;
+  }
+  .feature-row.visual-left { grid-template-columns: minmax(0, 27rem) minmax(0, 21rem); }
+  .feature-row.visual-right { grid-template-columns: minmax(0, 21rem) minmax(0, 27rem); }
+  .feature-row.visual-left .feature-copy { grid-column: 2; grid-row: 1; }
+  .feature-row.visual-left figure { grid-column: 1; grid-row: 1; }
+  .feature-row.visual-right .feature-copy { grid-column: 1; grid-row: 1; }
+  .feature-row.visual-right figure { grid-column: 2; grid-row: 1; }
+  .feature-row.remote { grid-template-columns: minmax(0, 20rem) minmax(0, 28rem); }
+  .feature-row figure { width: 100%; max-width: none; margin: 0; }
+  .feature-row .feature-copy > :last-child { margin-bottom: 0; }
+  .feature-row .sidenote {
+    float: none;
+    display: block;
+    width: auto;
+    margin: .7rem 0 0;
+  }
+
   /* Sections */
   section { margin: 0 0 3rem; counter-increment: section; }
   section::after { content: ""; display: block; clear: both; }
@@ -195,6 +222,19 @@
       margin: 1.2rem 0 1.8rem;
     }
     figure.wide, figure.mid { width: 100%; max-width: 100%; }
+    .feature-row,
+    .feature-row.visual-left,
+    .feature-row.visual-right,
+    .feature-row.remote {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .55rem;
+      width: 100%;
+      margin: 1.8rem 0 2.4rem;
+    }
+    .feature-row figure { max-width: 30rem; }
+    .feature-row.remote figure { max-width: 20rem; }
   }
 
   footer {
@@ -310,21 +350,42 @@
       <figcaption>Because the note stores the text, it survives the next render.</figcaption>
     </figure>
 
-    <p>Also there's a panel on the other side of the window that you can talk to. Ask it about the document you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+    <div class="feature-row visual-left">
+      <div class="feature-copy">
+        <p>Also there's a panel on the other side of the window that you can talk to. Ask it about the document you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+      </div>
+      <figure>
+        <img src="assets/crop-review.png" width="451" height="704" loading="lazy"
+             alt="Two review cards showing original passages in red, proposed replacements in green, and Reject and Accept buttons.">
+        <figcaption>Source text above, proposed replacement below — nothing changes until you accept it.</figcaption>
+      </figure>
+    </div>
 
-    <p>Or turn that panel into a quiz. It asks a question grounded in the paper, keeps the answer hidden until you're ready, and schedules the question again from your Again, Hard, Good, or Easy rating. Every card links back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
-
-    <figure class="mid">
-      <img src="assets/crop-toolbar.png" width="955" height="73" loading="lazy"
-           alt="The document toolbar: export, zoom controls, agent, annotate, select, review, and presentation buttons.">
-      <figcaption>Export, zoom, the review panel, annotation, and presentation.</figcaption>
-    </figure>
+    <div class="feature-row visual-right">
+      <div class="feature-copy">
+        <p>Or turn that panel into a quiz. It asks a question grounded in the paper, keeps the answer hidden until you're ready, and schedules the question again from your Again, Hard, Good, or Easy rating. Every card links back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
+      </div>
+      <figure>
+        <img src="assets/crop-quiz.png" width="457" height="710" loading="lazy"
+             alt="A paper quiz with a source-backed question, its revealed answer, and Again, Hard, Good, and Easy rating buttons.">
+        <figcaption>Reveal the answer, rate your recall, and jump back to the supporting page.</figcaption>
+      </figure>
+    </div>
 
     <p>Also you can open a paper by pasting a URL, if it's arXiv or a PDF. It downloads it and keeps a copy.</p>
 
     <p>Or by pasting a link to an Overleaf project, if you've switched that project on for git. The app clones the repository, builds from that, and can push back.</p>
 
-    <p>Also there's a presentation mode, so you can write a talk in Beamer or Typst and then actually give it, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span> Or just present a PDF.</p>
+    <div class="feature-row visual-left remote">
+      <div class="feature-copy">
+        <p>Also there's a presentation mode, so you can write a talk in Beamer or Typst and then actually give it, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span> Or just present a PDF.</p>
+      </div>
+      <figure>
+        <img src="assets/crop-presentation-remote.png" width="526" height="788" loading="lazy"
+             alt="The phone presentation remote with the current slide, blackout, slide grid, laser, ink, previous, and next controls.">
+        <figcaption>The current slide and the controls you need while presenting, sized for a phone.</figcaption>
+      </figure>
+    </div>
 
     <p>Also there are some other things.</p>
 

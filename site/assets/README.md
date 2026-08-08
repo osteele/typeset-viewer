@@ -2,12 +2,12 @@
 
 Screenshots referenced by `../index.html`, all captured from a real document (a
 short Typst paper with numbered headings, a figure, a table, mathematics, and a
-bibliography) open in Typeset Viewer. Captured at 2x with
-`screencapture -l <windowid> -o` and cropped.
+bibliography) open in Typeset Viewer. The original document captures were taken
+at 2x with `screencapture -l <windowid> -o` and cropped. The newer feature-row
+captures are native-scale app and browser UI crops.
 
-One full-window shot carries the hero. Everything else is a small crop of a
-single control or panel, set in the right margin beside the sentence it
-illustrates.
+One full-window shot carries the hero. Small controls sit in the right margin;
+larger feature captures alternate beside their text in two-column rows.
 
 | File | Class | Placement | Shows |
 | --- | --- | --- | --- |
@@ -22,13 +22,16 @@ illustrates.
 | `crop-reference.png` | `.mfig` | works-cited paragraph | One reference with lookup links and citation count |
 | `crop-note.png` | `.mfig` | notes paragraph | A note card: quoted text plus comment |
 | `crop-highlight-sm.png` | `.mid` | notes paragraph | The highlighted phrase in the rendered page |
-| `crop-toolbar.png` | `.mid` | review-panel paragraph | The document toolbar buttons |
+| `crop-review.png` | `.feature-row` | review row, left | Review cards with original and proposed text |
+| `crop-quiz.png` | `.feature-row` | quiz row, right | Revealed answer and recall rating controls |
+| `crop-presentation-remote.png` | `.feature-row` | presentation row, left | Responsive phone remote with slide preview |
 
 ## Sizing
 
-These are 2x captures, so an image's natural CSS width is its pixel width ÷ 2.
-Aim to render between about 0.7x and 1.2x of that: below 0.7x the UI text goes
-illegible, above ~1.3x it visibly softens.
+For 2x captures, an image's natural CSS width is its pixel width ÷ 2. Aim to
+render between about 0.7x and 1.2x of that: below 0.7x the UI text goes
+illegible, above ~1.3x it visibly softens. The native-scale feature captures
+render close to their pixel dimensions.
 
 - **`.mfig`** — the margin column, `12.5rem` (200px). Crops around 434px wide
   land at 1.09x. Keep new margin crops near 434px.
@@ -37,6 +40,9 @@ illegible, above ~1.3x it visibly softens.
 - **`.wide`** — `50rem` (800px), spanning text plus margin. It carries
   `clear: right` so it cannot slide under a margin float; that costs vertical
   space, so use it sparingly. Only `crop-chart` does.
+- **`.feature-row`** — `50rem` (800px), split between prose and a substantial
+  UI capture. Rows alternate the visual between left and right. On narrow
+  screens the text comes first and the screenshot follows it.
 
 Below 900px the margin column collapses and both `.mfig` and `.sidenote` become
 blocks in the text column. `.mfig` is capped at `15rem` there — stretching a
@@ -62,8 +68,7 @@ slices the second one mid-word.
 
 ## Still missing
 
-Presentation mode, the review-panel suggestion cards, the reading-list window,
-and Overleaf sync status.
+The reading-list window and Overleaf sync status.
 
 To retake: the sidebars are only worth showing when the document has structure,
 so use a source with headings, captions, and a bibliography.
