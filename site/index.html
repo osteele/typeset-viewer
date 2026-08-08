@@ -20,7 +20,7 @@
     --bg: #fffff8;
     --fg: #14130f;
     --fg-soft: #4a473f;
-    --fg-mute: #8b877c;
+    --fg-mute: #706b60;
     --rule: #ddd9cc;
     --accent: #7a3c12;
     --measure: 36rem;
@@ -35,7 +35,7 @@
       --bg: #26241f;
       --fg: #d2ccbd;
       --fg-soft: #a9a396;
-      --fg-mute: #837e72;
+      --fg-mute: #aaa394;
       --rule: #3d3a32;
       --accent: #d19c66;
     }
@@ -101,6 +101,7 @@
   .get-meta { font-size: .88rem; color: var(--fg-mute); }
   .get-meta a { color: inherit; }
   .req { font-size: .88rem; color: var(--fg-soft); margin: 0 0 2.5rem; }
+  .feature-cta { margin-top: 2.2rem; }
 
   /* Figures */
   figure { margin: 1.2rem 0 1.8rem; max-width: var(--measure); }
@@ -125,6 +126,7 @@
     margin: .3rem 0 1.4rem 0;
   }
   figure.mfig figcaption { font-size: .75rem; margin-top: .35rem; }
+  figure.mfig.icon { width: 7.5rem; }
 
   /* Substantial feature captures get the full text-plus-margin measure. The
      copy stays first in the DOM so narrow layouts read naturally. */
@@ -221,7 +223,13 @@
       float: none; width: auto; max-width: 15rem;
       margin: 1.2rem 0 1.8rem;
     }
-    figure.wide, figure.mid { width: 100%; max-width: 100%; }
+    header > figure, figure.wide, figure.mid { width: 100%; max-width: 100%; }
+    figure.mfig.icon {
+      float: right;
+      clear: none;
+      width: 7.5rem;
+      margin: .2rem 0 .8rem 1rem;
+    }
     .feature-row,
     .feature-row.visual-left,
     .feature-row.visual-right,
@@ -260,7 +268,7 @@
     <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX — by <a href="https://osteele.com">Oliver Steele</a></p>
     <nav class="jump"><a href="#features">Features</a> · <a href="#installing">Installing</a> · <a href="#bugs">Bugs</a></nav>
 
-    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF. It re-renders when you save, and keeps your place on the page.</p>
+    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Add notes, ask for a source-aware review, or quiz yourself on the paper without leaving the document.</p>
 
     <p class="get-row">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
@@ -280,7 +288,7 @@
 
     <p>I like to edit a LaTeX file in one window and watch it refresh in another. So I wrote an app for that.</p>
 
-    <p>It doesn't edit anything — you keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">By running <code>latexmk</code>, <code>typst</code>, or Pandoc — the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
+    <p>It isn't a text editor — you keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">By running <code>latexmk</code>, <code>typst</code>, or Pandoc — the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
 
     <figure class="wide">
       <img src="assets/crop-chart.png" width="1650" height="610" loading="lazy"
@@ -288,7 +296,7 @@
       <figcaption>Figures, tables, and mathematics as the renderer produced them — the layout isn't re-implemented.</figcaption>
     </figure>
 
-    <p>It also works for Typst. (I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.)</p>
+    <p>Typst works the same way. I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.</p>
 
     <figure class="mid">
       <picture>
@@ -299,7 +307,12 @@
       <figcaption>What was rendered, how long it took, and when.</figcaption>
     </figure>
 
-    <p>Also, there's a PDF icon in the title bar. Drag it to the Finder, or into a mail message. It saves the step where you export a PDF and then go looking for wherever it went.</p>
+    <figure class="mfig icon">
+      <img src="assets/crop-pdf-icon.png" width="180" height="62" loading="lazy"
+           alt="The draggable PDF icon in the document title bar.">
+    </figure>
+
+    <p>The title bar has a PDF icon. Drag it to the Finder, or into a mail message. It saves the step where you export a PDF and then go looking for wherever it went.</p>
 
     <figure class="mfig">
       <img src="assets/crop-switcher.png" width="308" height="66" loading="lazy"
@@ -323,18 +336,14 @@
            alt="An index listing Figure 1 and Table 1 with their captions and page numbers.">
     </figure>
 
-    <p>Also, windows have a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes — all five for LaTeX and Typst, the first two for Markdown. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
-
-    <p>(Oh, right — it also does Markdown.)</p>
+    <p>Each window has a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes — all five for LaTeX and Typst, the first two for Markdown. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
 
     <figure class="mfig">
       <img src="assets/crop-reference.png" width="434" height="118" loading="lazy"
            alt="A reference entry with Semantic Scholar and arXiv links and a count of citations.">
     </figure>
 
-    <p>Each work cited gets links to its Semantic Scholar and arXiv pages, and a count of the places in your paper that cite it. And you can add it to a reading list.</p>
-
-    <p>(Oh, right — there's a reading list.)</p>
+    <p>Each work cited gets links to its Semantic Scholar and arXiv pages, and a count of the places in your paper that cite it. You can add it to a reading list for papers you want to come back to.</p>
 
     <figure class="mfig">
       <img src="assets/crop-note.png" width="434" height="202" loading="lazy"
@@ -342,7 +351,7 @@
       <figcaption>The note keeps its quote.</figcaption>
     </figure>
 
-    <p>Also you can highlight a passage and attach a note to it. The note remembers the words it was attached to rather than a position on the page, so it stays where it belongs after you rewrite the paragraph above it. Notes come along when you export or print.</p>
+    <p>Highlight a passage to attach a note to it. The note remembers the words it was attached to rather than a position on the page, so it stays where it belongs after you rewrite the paragraph above it. Notes come along when you export or print.</p>
 
     <figure class="mid">
       <img src="assets/crop-highlight-sm.png" width="730" height="56" loading="lazy"
@@ -352,33 +361,33 @@
 
     <div class="feature-row visual-left">
       <div class="feature-copy">
-        <p>Also there's a panel on the other side of the window that you can talk to. Ask it about the document you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+        <p>A panel on the other side of the window can talk through the document with you. Ask it about what you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
       </div>
       <figure>
-        <img src="assets/crop-review.png" width="451" height="704" loading="lazy"
-             alt="Two review cards showing original passages in red, proposed replacements in green, and Reject and Accept buttons.">
+        <img src="assets/crop-review.png" width="451" height="330" loading="lazy"
+             alt="A review card showing an original passage in red, its proposed replacement in green, and Reject and Accept buttons.">
         <figcaption>Source text above, proposed replacement below — nothing changes until you accept it.</figcaption>
       </figure>
     </div>
 
     <div class="feature-row visual-right">
       <div class="feature-copy">
-        <p>Or turn that panel into a quiz. It asks a question grounded in the paper, keeps the answer hidden until you're ready, and schedules the question again from your Again, Hard, Good, or Easy rating. Every card links back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
+        <p>That panel can become a quiz. It asks a question grounded in the paper, keeps the answer hidden until you're ready, and schedules the question again from your Again, Hard, Good, or Easy rating. Every card links back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
       </div>
       <figure>
-        <img src="assets/crop-quiz.png" width="457" height="710" loading="lazy"
+        <img src="assets/crop-quiz.png" width="457" height="525" loading="lazy"
              alt="A paper quiz with a source-backed question, its revealed answer, and Again, Hard, Good, and Easy rating buttons.">
         <figcaption>Reveal the answer, rate your recall, and jump back to the supporting page.</figcaption>
       </figure>
     </div>
 
-    <p>Also you can open a paper by pasting a URL, if it's arXiv or a PDF. It downloads it and keeps a copy.</p>
+    <p>Paste an arXiv or PDF URL to open a paper directly. The app downloads it and keeps a copy.</p>
 
-    <p>Or by pasting a link to an Overleaf project, if you've switched that project on for git. The app clones the repository, builds from that, and can push back.</p>
+    <p>An Overleaf project works too, if you've switched that project on for git. The app clones the repository, builds from that, and can push back.</p>
 
     <div class="feature-row visual-left remote">
       <div class="feature-copy">
-        <p>Also there's a presentation mode, so you can write a talk in Beamer or Typst and then actually give it, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span> Or just present a PDF.</p>
+        <p>Presentation mode turns a Beamer, Typst, or PDF talk into a slide deck you can actually give, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span></p>
       </div>
       <figure>
         <img src="assets/crop-presentation-remote.png" width="526" height="788" loading="lazy"
@@ -387,47 +396,35 @@
       </figure>
     </div>
 
-    <p>Also there are some other things.</p>
-
     <p class="signature">— Oliver Steele</p>
   </section>
 
   <section id="features">
     <h2>Features</h2>
     <dl>
-      <dt>Formats</dt>
-      <dd>Typst · LaTeX · Markdown · PDFs opened directly</dd>
+      <dt>Files and tools</dt>
+      <dd>Typst is bundled · Markdown uses Pandoc · LaTeX uses <code>latexmk</code> · PDFs open directly</dd>
 
-      <dt>Rendering</dt>
-      <dd>Renders again when you save · follows includes and <code>.bib</code> files · keeps your place on the page · builds in a temporary directory, leaving no <code>.aux</code> files behind</dd>
+      <dt>Opening and sync</dt>
+      <dd>Local files · arXiv IDs and URLs · cached PDF URLs · Overleaf projects over git, with pull, push, and sync</dd>
 
-      <dt>Sidebar</dt>
-      <dd>Page thumbnails · table of contents · figures and tables · works cited · notes</dd>
+      <dt>Rendering behavior</dt>
+      <dd>Follows includes and <code>.bib</code> files · keeps your place after a refresh · leaves no <code>.aux</code> files behind</dd>
 
-      <dt>Works cited</dt>
-      <dd>Semantic Scholar and arXiv links · the pages that cite each entry · add to reading list</dd>
+      <dt>Optional agents</dt>
+      <dd>Claude Code or Codex · disabled until you set one up · every proposed source change waits for your approval</dd>
 
-      <dt>Notes</dt>
-      <dd>Attached to the text rather than to a position · survive the next render · included when you export or print</dd>
+      <dt>Export and automation</dt>
+      <dd>Drag the title-bar PDF · export · print with notes · use <code>--render</code> from a script</dd>
 
-      <dt>Review panel</dt>
-      <dd>Proofreading · tightening · readability · citation coverage · questions about the document · edits arrive as cards to accept or reject · Claude Code or Codex · off until you set it up</dd>
-
-      <dt>Paper quizzes</dt>
-      <dd>Source-backed recall questions · answers hidden until revealed · Again, Hard, Good, and Easy review scheduling · page and passage links · persistent progress</dd>
-
-      <dt>Opening</dt>
-      <dd>Files · arXiv IDs and URLs · PDF URLs, downloaded and cached · Overleaf projects over git, with pull, push, and sync</dd>
-
-      <dt>Presenting</dt>
-      <dd>Page-fit slides · contact sheet · phone as remote over a QR code · laser pointer · Tailscale when the network won't cooperate</dd>
-
-      <dt>Getting the PDF out</dt>
-      <dd>Drag the title-bar icon · export · print, with the notes · <code>--render</code> from a script</dd>
-
-      <dt>Housekeeping</dt>
-      <dd>Reopens what you had open · updates itself · <code>--doctor</code> reports which tools it found</dd>
+      <dt>System</dt>
+      <dd>macOS 13 or later on Apple silicon · restores open documents · updates itself · <code>--doctor</code> reports which tools it found</dd>
     </dl>
+
+    <p class="get-row feature-cta">
+      <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
+      <span class="get-meta">Free · macOS 13 or later</span>
+    </p>
   </section>
 
   <section id="installing">

@@ -15,6 +15,7 @@ larger feature captures alternate beside their text in two-column rows.
 | `crop-chart.png` | `.wide` | after the opening | Bar chart with its numbered caption |
 | `crop-status.png` | `.mid` | Typst paragraph | Status bar: file, render duration, timestamp |
 | `crop-status-sm.png` | — | ≤700px variant | Same, fewer words |
+| `crop-pdf-icon.png` | `.mfig.icon` | PDF export paragraph | Draggable PDF title-bar icon |
 | `crop-switcher.png` | `.mfig` | sidebar paragraph | The five-segment sidebar mode control |
 | `crop-thumbnail.png` | `.mfig` | sidebar paragraph | One page thumbnail with its heading label |
 | `crop-toc.png` | `.mfig` | sidebar paragraph | Nested, numbered outline entries |
@@ -22,7 +23,7 @@ larger feature captures alternate beside their text in two-column rows.
 | `crop-reference.png` | `.mfig` | works-cited paragraph | One reference with lookup links and citation count |
 | `crop-note.png` | `.mfig` | notes paragraph | A note card: quoted text plus comment |
 | `crop-highlight-sm.png` | `.mid` | notes paragraph | The highlighted phrase in the rendered page |
-| `crop-review.png` | `.feature-row` | review row, left | Review cards with original and proposed text |
+| `crop-review.png` | `.feature-row` | review row, left | One review card with original and proposed text |
 | `crop-quiz.png` | `.feature-row` | quiz row, right | Revealed answer and recall rating controls |
 | `crop-presentation-remote.png` | `.feature-row` | presentation row, left | Responsive phone remote with slide preview |
 
