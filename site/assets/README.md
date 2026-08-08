@@ -24,7 +24,7 @@ larger feature captures alternate beside their text in two-column rows.
 | `crop-note.png` | `.mfig` | notes paragraph | A note card: quoted text plus comment |
 | `crop-highlight-sm.png` | `.mid` | notes paragraph | The highlighted phrase in the rendered page |
 | `crop-review.png` | `.feature-row` | review row, left | One review card with original and proposed text |
-| `crop-quiz.png` | `.feature-row` | quiz row, right | Revealed answer and recall rating controls |
+| `crop-quiz.png` | `.feature-row` | quiz row, right | Revealed answer, Agent handoff, and compact recall strip |
 | `crop-presentation-remote.png` | `.feature-row` | presentation row, left | Responsive phone remote with slide preview |
 
 ## Sizing
