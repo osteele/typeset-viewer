@@ -64,7 +64,7 @@
     counter-reset: section sn;
   }
 
-  h1, h2, p, ul, ol, .byline, .get-row, .req, .signature {
+  h1, h2, p, dl, ul, ol, .byline, .get-row, .req, .signature {
     max-width: var(--measure);
   }
 
@@ -79,8 +79,24 @@
   .byline { margin: 0 0 .55rem; color: var(--fg-mute); font-size: .95rem; font-style: italic; }
   .byline a { color: inherit; }
 
-  .jump { margin: 0 0 2rem; font-size: .85rem; color: var(--fg-mute); max-width: var(--measure); }
-  .jump a { color: var(--fg-soft); }
+  .toc {
+    max-width: var(--full);
+    margin: 0 0 3rem;
+    padding: .9rem 0 1rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-title { display: block; margin-bottom: .35rem; font-size: .82rem; color: var(--fg-mute); }
+  .toc ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .2rem 2rem;
+    max-width: none;
+    margin: 0;
+    padding-left: 1.4rem;
+    font-size: .88rem;
+  }
+  .toc a { color: var(--fg-soft); }
 
   .lede { font-size: 1.12rem; margin: 0 0 2rem; }
 
@@ -114,7 +130,7 @@
      not slide under a sidenote or margin figure */
   figure.wide { width: var(--full); max-width: none; clear: right; }
   figure.mid { max-width: 30rem; }
-  header > figure { width: var(--full); max-width: none; margin: 0 0 3rem; }
+  header > figure { width: var(--full); max-width: none; margin: 0 0 2.2rem; }
 
   /* Small UI details, set in the right margin beside the text they describe.
      These are section children, so the margin column is already inside the
@@ -177,6 +193,17 @@
 
   .signature { color: var(--fg-mute); font-style: italic; font-size: .95rem; }
   .signature a { color: inherit; }
+
+  .feature-set {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.3rem 2.2rem;
+    max-width: var(--full);
+    margin: 0;
+  }
+  .feature-set > div { border-top: 1px solid var(--rule); padding-top: .65rem; }
+  .feature-set dt { font-size: .95rem; font-weight: 600; }
+  .feature-set dd { margin: .15rem 0 0; font-size: .9rem; line-height: 1.55; color: var(--fg-soft); }
 
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -253,6 +280,7 @@
   @media (max-width: 600px) {
     body { font-size: 18px; }
     article { padding-top: 3rem; }
+    .toc ol, .feature-set { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -262,7 +290,6 @@
   <header>
     <h1>Typeset Viewer</h1>
     <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX — by <a href="https://osteele.com">Oliver Steele</a></p>
-    <nav class="jump"><a href="#reading">Tour</a> · <a href="#installing">Installing</a> · <a href="#bugs">Bugs</a></nav>
 
     <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Add notes, ask for a source-aware review, or quiz yourself on the paper without leaving the document.</p>
 
@@ -277,6 +304,18 @@
            alt="A Typst paper rendered in Typeset Viewer, with the table of contents sidebar showing numbered sections.">
       <figcaption>A Typst source file, rendered and open at the table of contents.</figcaption>
     </figure>
+
+    <nav class="toc" aria-label="Table of contents">
+      <span class="toc-title">Contents</span>
+      <ol>
+        <li><a href="#reading">Read and navigate</a></li>
+        <li><a href="#review">Annotate and review</a></li>
+        <li><a href="#presenting">Present</a></li>
+        <li><a href="#features">Feature reference</a></li>
+        <li><a href="#installing">Installing</a></li>
+        <li><a href="#bugs">Bugs and feedback</a></li>
+      </ol>
+    </nav>
   </header>
 
   <section id="why">
@@ -407,6 +446,54 @@
         <figcaption>The current slide and the controls you need while presenting, sized for a phone.</figcaption>
       </figure>
     </div>
+
+  </section>
+
+  <section id="features">
+    <h2>Feature reference</h2>
+
+    <dl class="feature-set">
+      <div>
+        <dt>Files and rendering</dt>
+        <dd>Typst through the bundled <code>typst</code>; Markdown through Pandoc; LaTeX through <code>latexmk</code>; PDFs open directly.</dd>
+      </div>
+      <div>
+        <dt>Refresh and continuity</dt>
+        <dd>Watches source, included files, and <code>.bib</code> files; renders on save; preserves your place; restores open documents.</dd>
+      </div>
+      <div>
+        <dt>Navigation</dt>
+        <dd>Page thumbnails with headings; table of contents; figures and tables index; works cited; notes sidebar.</dd>
+      </div>
+      <div>
+        <dt>References and reading list</dt>
+        <dd>Citation counts; Semantic Scholar and arXiv links; saved papers collected from arXiv IDs or URLs.</dd>
+      </div>
+      <div>
+        <dt>Notes and output</dt>
+        <dd>Text-anchored highlights and notes; notes included in exports and printing; draggable title-bar PDF.</dd>
+      </div>
+      <div>
+        <dt>Agent review</dt>
+        <dd>Document conversation; proofreading, tightening, and citation checks; source changes accepted or rejected one at a time.</dd>
+      </div>
+      <div>
+        <dt>Paper quizzes</dt>
+        <dd>Source-backed questions; hidden answers; four recall ratings; scheduled review; links to supporting passages.</dd>
+      </div>
+      <div>
+        <dt>URLs and Overleaf</dt>
+        <dd>Cached PDF URLs; direct arXiv downloads; Overleaf projects over git with pull, push, and sync.</dd>
+      </div>
+      <div>
+        <dt>Presentation</dt>
+        <dd>Page-fit slides; phone remote; slide grid; blackout; laser pointer; ink; previous and next controls.</dd>
+      </div>
+      <div>
+        <dt>System and automation</dt>
+        <dd>Sparkle updates; <code>--render</code> for scripts; <code>--doctor</code> for resolved tools; macOS 13 or later on Apple silicon.</dd>
+      </div>
+    </dl>
 
     <p class="get-row feature-cta">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
