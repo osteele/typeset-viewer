@@ -64,7 +64,7 @@
     counter-reset: section sn;
   }
 
-  h1, h2, p, dl, ul, ol, .byline, .get-row, .req, .signature {
+  h1, h2, p, ul, ol, .byline, .get-row, .req, .signature {
     max-width: var(--measure);
   }
 
@@ -171,16 +171,12 @@
     font-weight: 400;
     margin-right: .8rem;
   }
+  #why { counter-increment: none; }
+  #why > h2::before { content: none; }
   p { margin: 0 0 1.1rem; }
 
   .signature { color: var(--fg-mute); font-style: italic; font-size: .95rem; }
   .signature a { color: inherit; }
-
-  /* Grouped feature list */
-  dl { margin: 0; }
-  dt { font-weight: 600; margin: 1.15rem 0 .1rem; font-size: .95rem; }
-  dt:first-of-type { margin-top: 0; }
-  dd { margin: 0; color: var(--fg-soft); font-size: .95rem; }
 
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -266,7 +262,7 @@
   <header>
     <h1>Typeset Viewer</h1>
     <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX — by <a href="https://osteele.com">Oliver Steele</a></p>
-    <nav class="jump"><a href="#features">Features</a> · <a href="#installing">Installing</a> · <a href="#bugs">Bugs</a></nav>
+    <nav class="jump"><a href="#reading">Tour</a> · <a href="#installing">Installing</a> · <a href="#bugs">Bugs</a></nav>
 
     <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Add notes, ask for a source-aware review, or quiz yourself on the paper without leaving the document.</p>
 
@@ -284,19 +280,27 @@
   </header>
 
   <section id="why">
-    <h2>Why it exists</h2>
+    <h2>A note from the author</h2>
 
     <p>I like to edit a LaTeX file in one window and watch it refresh in another. So I wrote an app for that.</p>
 
-    <p>It isn't a text editor. You keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">It runs <code>latexmk</code>, <code>typst</code>, or Pandoc, the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
+    <p>I wanted to keep using my editor and the command-line tools behind it. Typeset Viewer runs <code>latexmk</code>, <code>typst</code>, or Pandoc and puts the rendered PDF in a native window. It builds in a temporary directory, so working folders do not fill with <code>.aux</code> and <code>.log</code> files.</p>
+
+    <p>Typst works the same way. I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.</p>
+
+    <p class="signature">— Oliver Steele</p>
+  </section>
+
+  <section id="reading">
+    <h2>Read and navigate</h2>
+
+    <p>Open a <code>.typ</code>, <code>.md</code>, <code>.tex</code>, or PDF file. Typeset Viewer follows included source and <code>.bib</code> files, renders again when they change, and keeps your reading position. It also restores open documents when you relaunch it.</p>
 
     <figure class="wide">
       <img src="assets/crop-chart.png" width="1650" height="610" loading="lazy"
            alt="A rendered bar chart with a numbered figure caption below it.">
       <figcaption>Figures, tables, mathematics, and layout come from the renderer.</figcaption>
     </figure>
-
-    <p>Typst works the same way. I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.</p>
 
     <figure class="mid">
       <picture>
@@ -312,7 +316,7 @@
            alt="The draggable PDF icon in the document title bar.">
     </figure>
 
-    <p>The title bar has a PDF icon. Drag it to the Finder, or into a mail message. It saves the step where you export a PDF and then go looking for wherever it went.</p>
+    <p>The title bar has a PDF icon. Drag it to the Finder or into a mail message. You can also export, print, or use <code>--render</code> from a script.</p>
 
     <figure class="mfig">
       <img src="assets/crop-switcher.png" width="308" height="66" loading="lazy"
@@ -344,6 +348,14 @@
     </figure>
 
     <p>Each work cited gets links to its Semantic Scholar and arXiv pages, and a count of the places in your paper that cite it. You can add it to a reading list for papers you want to come back to.</p>
+
+    <p>Paste an arXiv or PDF URL to open a paper directly. The app downloads it and keeps a copy.</p>
+
+    <p>An Overleaf project works too, if you've switched that project on for git. The app clones the repository, builds from that, and can pull or push changes.</p>
+  </section>
+
+  <section id="review">
+    <h2>Annotate and review</h2>
 
     <figure class="mfig">
       <img src="assets/crop-note.png" width="434" height="202" loading="lazy"
@@ -380,10 +392,10 @@
         <figcaption>Reveal the answer, rate your recall, or keep talking with the Agent.</figcaption>
       </figure>
     </div>
+  </section>
 
-    <p>Paste an arXiv or PDF URL to open a paper directly. The app downloads it and keeps a copy.</p>
-
-    <p>An Overleaf project works too, if you've switched that project on for git. The app clones the repository, builds from that, and can push back.</p>
+  <section id="presenting">
+    <h2>Present</h2>
 
     <div class="feature-row visual-left remote">
       <div class="feature-copy">
@@ -395,31 +407,6 @@
         <figcaption>The current slide and the controls you need while presenting, sized for a phone.</figcaption>
       </figure>
     </div>
-
-    <p class="signature">— Oliver Steele</p>
-  </section>
-
-  <section id="features">
-    <h2>Features</h2>
-    <dl>
-      <dt>Files and tools</dt>
-      <dd>Typst is bundled · Markdown uses Pandoc · LaTeX uses <code>latexmk</code> · PDFs open directly</dd>
-
-      <dt>Opening and sync</dt>
-      <dd>Local files · arXiv IDs and URLs · cached PDF URLs · Overleaf projects over git, with pull, push, and sync</dd>
-
-      <dt>Rendering behavior</dt>
-      <dd>Follows includes and <code>.bib</code> files · keeps your place after a refresh · leaves no <code>.aux</code> files behind</dd>
-
-      <dt>Optional agents</dt>
-      <dd>Claude Code or Codex · disabled until you set one up · every proposed source change waits for your approval</dd>
-
-      <dt>Export and automation</dt>
-      <dd>Drag the title-bar PDF · export · print with notes · use <code>--render</code> from a script</dd>
-
-      <dt>System</dt>
-      <dd>macOS 13 or later on Apple silicon · restores open documents · updates itself · <code>--doctor</code> reports which tools it found</dd>
-    </dl>
 
     <p class="get-row feature-cta">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
