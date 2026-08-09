@@ -7,13 +7,13 @@
 <title>Typeset Viewer — a native macOS viewer for Typst, Markdown &amp; LaTeX</title>
 <meta name="description" content="Typeset Viewer renders Typst, Markdown, and LaTeX to PDF in a native macOS window. Read, annotate, review, and quiz yourself on papers without leaving the document.">
 <meta property="og:title" content="Typeset Viewer">
-<meta property="og:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF—with notes, review tools, and source-backed paper quizzes.">
+<meta property="og:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF, with notes, review tools, and source-backed paper quizzes.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://typeset.osteele.com/">
 <meta property="og:image" content="https://typeset.osteele.com/assets/og-quiz.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Typeset Viewer">
-<meta name="twitter:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF—with notes, review tools, and source-backed paper quizzes.">
+<meta name="twitter:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF, with notes, review tools, and source-backed paper quizzes.">
 <meta name="twitter:image" content="https://typeset.osteele.com/assets/og-quiz.png">
 <style>
   :root {
@@ -288,12 +288,12 @@
 
     <p>I like to edit a LaTeX file in one window and watch it refresh in another. So I wrote an app for that.</p>
 
-    <p>It isn't a text editor — you keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">By running <code>latexmk</code>, <code>typst</code>, or Pandoc — the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
+    <p>It isn't a text editor. You keep whichever editor you already use. Open a <code>.tex</code> file and it renders in a window. Save, and it renders again. Save a file that one pulls in, like your <code>.bib</code>, and it notices that too. It typesets in a temporary directory and cleans up after itself, so your own directory doesn't fill with <code>.aux</code> and <code>.log</code>.<span class="sn-ref"></span><span class="sidenote">It runs <code>latexmk</code>, <code>typst</code>, or Pandoc, the same command-line tools you would run yourself. What's around them is a small SwiftUI and AppKit app, not Electron.</span></p>
 
     <figure class="wide">
       <img src="assets/crop-chart.png" width="1650" height="610" loading="lazy"
            alt="A rendered bar chart with a numbered figure caption below it.">
-      <figcaption>Figures, tables, and mathematics as the renderer produced them — the layout isn't re-implemented.</figcaption>
+      <figcaption>Figures, tables, mathematics, and layout come from the renderer.</figcaption>
     </figure>
 
     <p>Typst works the same way. I've moved to Typst for everything I'm not submitting somewhere that insists on LaTeX.</p>
@@ -336,7 +336,7 @@
            alt="An index listing Figure 1 and Table 1 with their captions and page numbers.">
     </figure>
 
-    <p>Each window has a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes — all five for LaTeX and Typst, the first two for Markdown. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
+    <p>Each window has a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes. All five are available for LaTeX and Typst; Markdown has the first two. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
 
     <figure class="mfig">
       <img src="assets/crop-reference.png" width="434" height="118" loading="lazy"
@@ -361,12 +361,12 @@
 
     <div class="feature-row visual-left">
       <div class="feature-copy">
-        <p>A panel on the other side of the window can talk through the document with you. Ask it about what you're reading, or set it on the source — proofreading, tightening, checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+        <p>A panel on the other side of the window can talk through the document with you. Ask it about what you're reading, or set it on the source for proofreading, tightening, or checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
       </div>
       <figure>
         <img src="assets/crop-review.png" width="451" height="330" loading="lazy"
              alt="A review card showing an original passage in red, its proposed replacement in green, and Reject and Accept buttons.">
-        <figcaption>Source text above, proposed replacement below — nothing changes until you accept it.</figcaption>
+        <figcaption>Source text above, proposed replacement below. Nothing changes until you accept it.</figcaption>
       </figure>
     </div>
 
@@ -387,7 +387,7 @@
 
     <div class="feature-row visual-left remote">
       <div class="feature-copy">
-        <p>Presentation mode turns a Beamer, Typst, or PDF talk into a slide deck you can actually give, with a remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span></p>
+        <p>Presentation mode displays a Beamer, Typst, or PDF talk as slides and provides a phone remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span></p>
       </div>
       <figure>
         <img src="assets/crop-presentation-remote.png" width="526" height="788" loading="lazy"
@@ -431,14 +431,14 @@
     <h2>Installing</h2>
     <p>Unzip the download and drag <b>Typeset Viewer</b> to your Applications folder. Typst is bundled, so <code>.typ</code> files work immediately.</p>
     <p>The other formats use tools you may already have: Markdown needs Pandoc,<span class="sn-ref"></span><span class="sidenote"><code>brew install pandoc</code></span> LaTeX needs <code>latexmk</code>,<span class="sn-ref"></span><span class="sidenote">Install MacTeX or the smaller BasicTeX.</span> and Overleaf sync needs <code>git</code>. The app says so when one is missing, and <code>--doctor</code> prints everything it resolved.</p>
-    <p>It updates itself through <a href="https://sparkle-project.org">Sparkle</a> — or use <b>Check for Updates…</b> in the app menu.</p>
+    <p>It updates itself through <a href="https://sparkle-project.org">Sparkle</a>. You can also use <b>Check for Updates…</b> in the app menu.</p>
   </section>
 
   <section id="bugs">
     <h2>Bugs and feedback</h2>
-    <p>This is a one-person project and it is still before 1.0, so expect rough edges. Reports are genuinely welcome; I read all of them.</p>
+    <p>This is a one-person project and it is still before 1.0, so expect rough edges. Reports are welcome; I read all of them.</p>
     <p><a href="https://github.com/osteele/typeset-viewer/issues/new?labels=bug">Report a bug</a>, or use <b>Help ▸ Report a Bug…</b> in the app, which fills in your version and environment for you. For anything else, <a href="mailto:steele@osteele.com">email me</a>.</p>
-    <p>Typeset Viewer is free but closed-source. The repository behind this page holds the releases, the issue tracker, and this page itself — not the application source.</p>
+    <p>Typeset Viewer is free but closed-source. The repository behind this page holds the releases, the issue tracker, and this page itself. The application source is private and stored elsewhere.</p>
   </section>
 
   <footer>
