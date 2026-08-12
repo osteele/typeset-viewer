@@ -1,0 +1,13 @@
+{
+  "name": "typeset-viewer-site",
+  "private": true,
+  "scripts": {
+    "check": "biome check screenshots/check.ts && tsc --noEmit && bun screenshots/check.ts",
+    "format": "biome format --write screenshots/check.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.10",
+    "@types/bun": "1.4.0",
+    "typescript": "5.7.2"
+  }
+}

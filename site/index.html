@@ -289,15 +289,15 @@
 
   <header>
     <h1>Typeset Viewer</h1>
-    <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX — by <a href="https://osteele.com">Oliver Steele</a></p>
+    <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX by <a href="https://osteele.com">Oliver Steele</a></p>
 
-    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Add notes, ask for a source-aware review, or quiz yourself on the paper without leaving the document.</p>
+    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Select a passage to look it up, add a note, explain it, or start a source-aware review without leaving the document.</p>
 
     <p class="get-row">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
-      <span class="get-meta">Version 0.7.3 · 9 August 2026 · <a href="https://github.com/osteele/typeset-viewer/releases">release notes</a></span>
+      <span class="get-meta">Version 0.8.0 · 23 August 2026 · <a href="https://github.com/osteele/typeset-viewer/releases">release notes</a></span>
     </p>
-    <p class="req">Free. Requires macOS 13 or later on Apple silicon. Signed and notarized, so it opens without a security warning.</p>
+    <p class="req">Free. Requires macOS 14 or later on Apple silicon. Signed and notarized, so it opens without a security warning.</p>
 
     <figure>
       <img src="assets/screenshot-main.png" width="2000" height="1309"
@@ -396,6 +396,14 @@
   <section id="review">
     <h2>Annotate and review</h2>
 
+    <figure class="mid">
+      <img src="assets/crop-selection-minibar.png" width="1190" height="340" loading="lazy"
+           alt="Selected text in a rendered paper with Add Note, Explain, Review, and more actions above it.">
+      <figcaption>The action bar adapts to the selected text.</figcaption>
+    </figure>
+
+    <p>Select a word to look it up or search the web. Select a longer passage to add a note, ask for an explanation, or choose a review prompt. The action bar appears after selection and dismisses when you keep reading.</p>
+
     <figure class="mfig">
       <img src="assets/crop-note.png" width="434" height="202" loading="lazy"
            alt="A note card showing the quoted text and the comment attached to it.">
@@ -412,7 +420,7 @@
 
     <div class="feature-row visual-left">
       <div class="feature-copy">
-        <p>A panel on the other side of the window can talk through the document with you. Ask it about what you're reading, or set it on the source for proofreading, tightening, or checking that everything you cite is actually in the bibliography. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">This one needs Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed, and stays off until you set it up.</span></p>
+        <p>Built-in review tools can proofread the source, tighten its prose, or check that cited works appear in the bibliography. The document conversation handles open-ended questions about what you are reading. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">Review and document conversation need Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed. These tools stay off until you choose a backend.</span></p>
       </div>
       <figure>
         <img src="assets/crop-review.png" width="451" height="330" loading="lazy"
@@ -474,8 +482,8 @@
         <dd>Text-anchored highlights and notes; notes included in exports and printing; draggable title-bar PDF.</dd>
       </div>
       <div>
-        <dt>Agent review</dt>
-        <dd>Document conversation; proofreading, tightening, and citation checks; source changes accepted or rejected one at a time.</dd>
+        <dt>Built-in review and agent</dt>
+        <dd>Selection actions; document conversation; proofreading, tightening, and citation checks; source changes accepted or rejected one at a time.</dd>
       </div>
       <div>
         <dt>Paper quizzes</dt>
@@ -491,13 +499,13 @@
       </div>
       <div>
         <dt>System and automation</dt>
-        <dd>Sparkle updates; <code>--render</code> for scripts; <code>--doctor</code> for resolved tools; macOS 13 or later on Apple silicon.</dd>
+        <dd>Sparkle updates; <code>--render</code> for scripts; <code>--doctor</code> for resolved tools; macOS 14 or later on Apple silicon.</dd>
       </div>
     </dl>
 
     <p class="get-row feature-cta">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/latest">Download for macOS</a>
-      <span class="get-meta">Free · macOS 13 or later</span>
+      <span class="get-meta">Free · macOS 14 or later</span>
     </p>
   </section>
 

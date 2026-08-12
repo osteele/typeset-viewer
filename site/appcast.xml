@@ -3,13 +3,13 @@
     <channel>
         <title>Typeset Viewer</title>
         <item>
-            <title>0.7.3</title>
-            <pubDate>Sun, 09 Aug 2026 08:37:04 -0400</pubDate>
-            <sparkle:version>11</sparkle:version>
-            <sparkle:shortVersionString>0.7.3</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <title>0.8.0</title>
+            <pubDate>Sun, 23 Aug 2026 13:42:48 -0400</pubDate>
+            <sparkle:version>12</sparkle:version>
+            <sparkle:shortVersionString>0.8.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
-            <enclosure url="https://github.com/osteele/typeset-viewer/releases/download/v0.7.3/TypesetViewer-0.7.3.zip" length="28596733" type="application/octet-stream" sparkle:edSignature="efFJJrAjuQk6Yi1jduw2uS9dzwlNl3HHTW4k2xWbFQpLzj1kHU3UH9HB/3dy3fGDMOHu5D5Hv/p5FyApBP3aCg=="/>
+            <enclosure url="https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip" length="29624154" type="application/octet-stream" sparkle:edSignature="Rv0JRvxh0ipVmoM2GAUDLGgFlaJ4fzT7eSfC7lNqMhzRerLRnzjKrXQQftxpWri7w55AP9D468EAHn6uolf9AA=="/>
         </item>
     </channel>
 </rss>

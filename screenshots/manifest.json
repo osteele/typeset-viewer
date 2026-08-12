@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "captureProfile": {
+    "productVersion": "0.8.0",
+    "reviewProvider": "built-in",
+    "launchArguments": [
+      "-ReviewIntegrationEnabled", "NO",
+      "-RestoreWindowsOnLaunch", "NO",
+      "-DefaultSidebarMode", "outline",
+      "-DefaultZoomMode", "fitPage"
+    ]
+  },
+  "assets": [
+    { "id": "hero", "output": "site/assets/screenshot-main.png", "width": 2000, "height": 1309 },
+    { "id": "chart", "output": "site/assets/crop-chart.png", "width": 1650, "height": 610 },
+    { "id": "figures", "output": "site/assets/crop-figures.png", "width": 434, "height": 186 },
+    { "id": "highlight", "output": "site/assets/crop-highlight-sm.png", "width": 730, "height": 56 },
+    { "id": "note", "output": "site/assets/crop-note.png", "width": 434, "height": 202 },
+    { "id": "pdf-icon", "output": "site/assets/crop-pdf-icon.png", "width": 180, "height": 62 },
+    { "id": "presentation-remote", "output": "site/assets/crop-presentation-remote.png", "width": 526, "height": 788 },
+    { "id": "quiz", "output": "site/assets/crop-quiz.png", "width": 557, "height": 440 },
+    { "id": "reference", "output": "site/assets/crop-reference.png", "width": 434, "height": 118 },
+    { "id": "review", "output": "site/assets/crop-review.png", "width": 451, "height": 330 },
+    { "id": "selection-minibar", "output": "site/assets/crop-selection-minibar.png", "width": 1190, "height": 340, "fixture": "fixtures/screenshots/adaptive-quadrature/main.typ", "rawCapture": "screenshots/originals/selection-minibar.png", "crop": { "x": 500, "y": 490, "width": 1190, "height": 340 } },
+    { "id": "status-mobile", "output": "site/assets/crop-status-sm.png", "width": 880, "height": 53 },
+    { "id": "status", "output": "site/assets/crop-status.png", "width": 1110, "height": 53 },
+    { "id": "switcher", "output": "site/assets/crop-switcher.png", "width": 308, "height": 66 },
+    { "id": "thumbnail", "output": "site/assets/crop-thumbnail.png", "width": 434, "height": 334 },
+    { "id": "toc", "output": "site/assets/crop-toc.png", "width": 434, "height": 397 },
+    { "id": "social", "output": "site/assets/og-quiz.png", "width": 1200, "height": 630 }
+  ]
+}

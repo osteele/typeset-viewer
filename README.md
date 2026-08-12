@@ -14,7 +14,7 @@ A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** f
 2. Unzip and drag **Typeset Viewer** to your Applications folder.
 3. Open it. The app is notarized by Apple, so it launches without security warnings.
 
-**Requirements:** macOS 13 or later (Apple silicon). Typst is bundled. Markdown rendering uses [Pandoc](https://pandoc.org); LaTeX rendering uses `latexmk` (MacTeX/BasicTeX). The app reports when an external tool is missing.
+**Requirements:** macOS 14 or later (Apple silicon). Typst is bundled. Markdown rendering uses [Pandoc](https://pandoc.org); LaTeX rendering uses `latexmk` (MacTeX/BasicTeX). The app reports when an external tool is missing.
 
 ## Features
 
@@ -29,6 +29,27 @@ A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** f
 ## Updates
 
 Typeset Viewer updates itself using [Sparkle](https://sparkle-project.org). Use **Check for Updates…** in the app menu, or let it check on its own.
+
+## Website screenshots
+
+The synthetic paper under `fixtures/screenshots/adaptive-quadrature/` is the
+canonical source for new and replacement document screenshots.
+`screenshots/manifest.json` records their dimensions and capture profile. Run
+`just screenshots-check` after changing the page or its images.
+
+To start a clean capture session against a local app bundle:
+
+```sh
+just screenshots-launch "/path/to/Typeset Viewer.app"
+```
+
+The launcher disables optional `agent-review` integration for that process and
+opens a temporary copy of the fixture, so saved windows and per-document state
+do not affect the result. Prepare the requested UI state, then run, for example,
+`just screenshot selection-minibar`.
+
+Capture recipes require `jq` and ImageMagick. Validation uses Bun and the macOS
+`sips` utility.
 
 ## Feedback & bug reports
 

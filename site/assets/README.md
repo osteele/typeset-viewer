@@ -1,10 +1,18 @@
 # Landing-page images
 
-Screenshots referenced by `../index.html`, all captured from a real document (a
-short Typst paper with numbered headings, a figure, a table, mathematics, and a
-bibliography) open in Typeset Viewer. The original document captures were taken
-at 2x with `screencapture -l <windowid> -o` and cropped. The newer feature-row
+Screenshots referenced by `../index.html` use a synthetic Typst paper with
+numbered headings, a figure, a table, mathematics, and a bibliography. The
+original document captures predate the persisted fixture. New and replacement
+captures use `../../fixtures/screenshots/adaptive-quadrature/`, which preserves
+the same title and document structure. The original captures were taken at 2x
+with `screencapture -l <windowid> -o` and cropped. The newer feature-row
 captures are native-scale app and browser UI crops.
+
+`../../screenshots/manifest.json` records every deployed PNG, its dimensions,
+and the standalone-product launch profile. `just screenshots-launch APP` opens
+a fresh fixture copy with optional `agent-review` integration disabled for that
+process. `just screenshot ID` captures the current app window, and
+`just screenshots-check` verifies the manifest against the page.
 
 One full-window shot carries the hero. Small controls sit in the right margin;
 larger feature captures alternate beside their text in two-column rows.
@@ -24,6 +32,7 @@ larger feature captures alternate beside their text in two-column rows.
 | `crop-note.png` | `.mfig` | notes paragraph | A note card: quoted text plus comment |
 | `crop-highlight-sm.png` | `.mid` | notes paragraph | The highlighted phrase in the rendered page |
 | `crop-review.png` | `.feature-row` | review row, left | One review card with original and proposed text |
+| `crop-selection-minibar.png` | `.mid` | selection paragraph | Selected text with the adaptive action bar |
 | `crop-quiz.png` | `.feature-row` | quiz row, right | Revealed answer, Agent handoff, and compact recall strip |
 | `crop-presentation-remote.png` | `.feature-row` | presentation row, left | Responsive phone remote with slide preview |
 
@@ -71,5 +80,5 @@ slices the second one mid-word.
 
 The reading-list window and Overleaf sync status.
 
-To retake: the sidebars are only worth showing when the document has structure,
-so use a source with headings, captions, and a bibliography.
+To retake: use the persisted fixture. The sidebars are only worth showing when
+the document has structure, so keep its headings, captions, and bibliography.

@@ -15,7 +15,22 @@ deploy:
     wrangler pages deploy site --project-name {{project}} --branch main
 
 # Stage the signed appcast produced by the app repo's `just appcast` into site/.
-# Typical source: ~/code/apps/typeset-viewer/dist/appcast.xml
+# Typical source: ~/code/document-tools/typeset-viewer/dist/appcast.xml
 appcast source:
     cp "{{source}}" site/appcast.xml
-    @echo "Staged site/appcast.xml. Run `just deploy` to publish."
+    @echo 'Staged site/appcast.xml. Run just deploy to publish.'
+
+# Open a fresh copy of the screenshot fixture with optional agent-review
+# integration disabled for this process.
+screenshots-launch app:
+    bash screenshots/capture.sh launch "{{app}}"
+
+# Capture one manifest asset from the frontmost Typeset Viewer document window.
+screenshot id:
+    bash screenshots/capture.sh capture "{{id}}"
+
+# Verify that site image references, manifest entries, files, and dimensions agree.
+screenshots-check:
+    bun run check
+
+check: screenshots-check
