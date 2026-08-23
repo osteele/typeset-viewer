@@ -2,7 +2,7 @@
 
 A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** files. Open a supported file and it renders to a PDF in a native window. The app includes live refresh, notes, review tools, a reading list, and presentation mode.
 
-**Website:** [typeset.osteele.com](https://typeset.osteele.com) · **Download:** [latest release](https://github.com/osteele/typeset-viewer/releases/latest)
+**Website:** [typeset.osteele.com](https://typeset.osteele.com) · **Download:** [Typeset Viewer 0.8.0 for macOS](https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip)
 
 > This repository hosts the app's **releases, website, and issue tracker**. Typeset Viewer is free but closed-source; the application source is not included here.
 
@@ -10,7 +10,7 @@ A native macOS preview and review tool for **Typst, Markdown, LaTeX, and PDF** f
 
 ## Install
 
-1. Download the latest `.zip` from [Releases](https://github.com/osteele/typeset-viewer/releases/latest).
+1. Download [Typeset Viewer 0.8.0 for macOS](https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip).
 2. Unzip and drag **Typeset Viewer** to your Applications folder.
 3. Open it. The app is notarized by Apple, so it launches without security warnings.
 

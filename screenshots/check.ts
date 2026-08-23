@@ -19,6 +19,7 @@ const manifest = (await Bun.file(
 	join(repoRoot, "screenshots/manifest.json"),
 ).json()) as ScreenshotManifest;
 const html = await Bun.file(join(repoRoot, "site/index.html")).text();
+const appcast = await Bun.file(join(repoRoot, "site/appcast.xml")).text();
 const referenced = new Set(
 	[
 		...html.matchAll(
@@ -31,6 +32,27 @@ const failures: string[] = [];
 
 if (manifest.schemaVersion !== 1)
 	failures.push(`unsupported manifest schema ${manifest.schemaVersion}`);
+
+const appcastDownloadURL = appcast.match(
+	/<enclosure\b[^>]*\burl="([^"]+)"/,
+)?.[1];
+const downloadURLs = [
+	...html.matchAll(
+		/<a\b[^>]*href="([^"]+)"[^>]*>\s*Download(?: for [^<]+)?\s*<\/a>/g,
+	),
+].map((match) => match[1]);
+if (!appcastDownloadURL) {
+	failures.push("appcast has no enclosure download URL");
+} else {
+	if (downloadURLs.length === 0) failures.push("site has no download links");
+	for (const url of downloadURLs) {
+		if (url !== appcastDownloadURL) {
+			failures.push(
+				`download link does not match the appcast installer: ${url}`,
+			);
+		}
+	}
+}
 
 for (const path of referenced) {
 	if (!declared.has(path))
