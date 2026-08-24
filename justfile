@@ -22,8 +22,8 @@ appcast source:
 
 # Open a fresh copy of the screenshot fixture with optional agent-review
 # integration disabled for this process.
-screenshots-launch app:
-    bash screenshots/capture.sh launch "{{app}}"
+screenshots-launch app profile="document":
+    bash screenshots/capture.sh launch "{{app}}" "{{profile}}"
 
 # Capture one manifest asset from the frontmost Typeset Viewer document window.
 screenshot id:

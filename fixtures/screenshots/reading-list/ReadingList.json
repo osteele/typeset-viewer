@@ -1,0 +1,68 @@
+[
+  {
+    "abstract" : "A practical comparison of adaptive quadrature rules for smooth and weakly singular integrands, with error estimates that can be checked from the source.",
+    "addedAt" : "2026-08-18T14:30:00Z",
+    "arxivID" : "2508.10421",
+    "authors" : "Mira Chen and Daniel Okafor",
+    "id" : "6D13C342-DF98-4D26-8BCD-1373710CBA10",
+    "origins" : [
+      {
+        "addedAt" : "2026-08-18T14:30:00Z",
+        "id" : "5B876286-2307-43C9-9D89-213275D50B16",
+        "markerText" : "[4]",
+        "pageSummary" : "page 2",
+        "sourcePath" : null,
+        "sourceTitle" : "Adaptive Quadrature"
+      }
+    ],
+    "paperURL" : "https:\/\/arxiv.org\/abs\/2508.10421",
+    "referenceID" : "arxiv:2508.10421",
+    "searchText" : "Reliable Adaptive Quadrature Mira Chen Daniel Okafor",
+    "title" : "Reliable Adaptive Quadrature for Difficult Integrands",
+    "year" : "2025"
+  },
+  {
+    "abstract" : "Shows how renderer metadata can preserve document structure across repeated builds and support stable navigation in a native reader.",
+    "addedAt" : "2026-08-12T09:15:00Z",
+    "arxivID" : "2406.01742",
+    "authors" : "Elena Rossi et al.",
+    "id" : "EA7205A1-7D75-4E9A-A2A3-7F513DD4551F",
+    "origins" : [
+      {
+        "addedAt" : "2026-08-12T09:15:00Z",
+        "id" : "9A652C9A-7797-47AF-BA7A-F9A093037E56",
+        "markerText" : "[11]",
+        "pageSummary" : "page 5",
+        "sourcePath" : null,
+        "sourceTitle" : "Adaptive Quadrature"
+      }
+    ],
+    "paperURL" : "https:\/\/arxiv.org\/abs\/2406.01742",
+    "referenceID" : "arxiv:2406.01742",
+    "searchText" : "Structural Metadata for Reproducible Documents Elena Rossi",
+    "title" : "Structural Metadata for Reproducible Documents",
+    "year" : "2024"
+  },
+  {
+    "abstract" : "A concise account of source-linked annotations that remain attached after nearby prose is edited and the document is rendered again.",
+    "addedAt" : "2026-08-05T17:45:00Z",
+    "arxivID" : null,
+    "authors" : "Noah Williams",
+    "id" : "05CB99A0-B04E-4E52-BEEA-9BC548B9A86C",
+    "origins" : [
+      {
+        "addedAt" : "2026-08-05T17:45:00Z",
+        "id" : "76966E74-4B22-4D77-84DE-858A422AF966",
+        "markerText" : "Selected passage",
+        "pageSummary" : "page 7",
+        "sourcePath" : null,
+        "sourceTitle" : "Adaptive Quadrature"
+      }
+    ],
+    "paperURL" : "https:\/\/example.org\/papers\/durable-annotations.pdf",
+    "referenceID" : "url:https:\/\/example.org\/papers\/durable-annotations.pdf",
+    "searchText" : "Durable Annotations in Rendered Documents Noah Williams",
+    "title" : "Durable Annotations in Rendered Documents",
+    "year" : "2023"
+  }
+]

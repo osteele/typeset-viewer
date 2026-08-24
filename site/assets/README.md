@@ -9,9 +9,10 @@ with `screencapture -l <windowid> -o` and cropped. The newer feature-row
 captures are native-scale app and browser UI crops.
 
 `../../screenshots/manifest.json` records every deployed PNG, its dimensions,
-and the standalone-product launch profile. `just screenshots-launch APP` opens
-a fresh fixture copy with optional `agent-review` integration disabled for that
-process. `just screenshot ID` captures the current app window, and
+and the standalone-product launch profile. `just screenshots-launch APP PROFILE`
+opens an isolated fixture copy with optional `agent-review` integration disabled
+for that process. The profiles are `document`, `reading-list`, and `overleaf`.
+`just screenshot ID` captures the current app window, and
 `just screenshots-check` verifies the manifest against the page.
 
 One full-window shot carries the hero. Small controls sit in the right margin;
@@ -24,9 +25,11 @@ larger feature captures alternate beside their text in two-column rows.
 | `crop-status.png` | `.mid` | Typst paragraph | Status bar: file, render duration, timestamp |
 | `crop-status-sm.png` | — | ≤700px variant | Same, fewer words |
 | `crop-pdf-icon.png` | `.mfig.icon` | PDF export paragraph | Draggable PDF title-bar icon |
+| `crop-reading-list.png` | `.feature-row` | reading-list row, left | Synthetic saved papers with provenance and actions |
 | `crop-switcher.png` | `.mfig` | sidebar paragraph | The five-segment sidebar mode control |
 | `crop-thumbnail.png` | `.mfig` | sidebar paragraph | One page thumbnail with its heading label |
 | `crop-toc.png` | `.mfig` | sidebar paragraph | Nested, numbered outline entries |
+| `crop-overleaf-status.png` | `.feature-row` | Overleaf row, right | Synced local checkout status |
 | `crop-figures.png` | `.mfig` | sidebar paragraph | Figure/table index entries with page numbers |
 | `crop-reference.png` | `.mfig` | works-cited paragraph | One reference with lookup links and citation count |
 | `crop-note.png` | `.mfig` | notes paragraph | A note card: quoted text plus comment |
@@ -75,10 +78,6 @@ dropped: at `.mid` the narrow crop reads well on both desktop and phone, and one
 line of highlighted text says everything the wider one did. It is cropped to a
 single line on purpose — a rectangle taken across two lines of justified text
 slices the second one mid-word.
-
-## Still missing
-
-The reading-list window and Overleaf sync status.
 
 To retake: use the persisted fixture. The sidebars are only worth showing when
 the document has structure, so keep its headings, captions, and bibliography.

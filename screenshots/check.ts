@@ -30,6 +30,18 @@ const referenced = new Set(
 const declared = new Map(manifest.assets.map((asset) => [asset.output, asset]));
 const failures: string[] = [];
 
+const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+const idSet = new Set(ids);
+for (const id of ids) {
+	if (ids.indexOf(id) !== ids.lastIndexOf(id)) {
+		failures.push(`duplicate HTML id: ${id}`);
+	}
+}
+for (const match of html.matchAll(/<a\b[^>]*\bhref="#([^"]+)"/g)) {
+	if (!idSet.has(match[1]))
+		failures.push(`internal link has no target: #${match[1]}`);
+}
+
 if (manifest.schemaVersion !== 1)
 	failures.push(`unsupported manifest schema ${manifest.schemaVersion}`);
 
