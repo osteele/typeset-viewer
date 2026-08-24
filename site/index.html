@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Typeset Viewer — a native macOS viewer for Typst, Markdown &amp; LaTeX</title>
-<meta name="description" content="Typeset Viewer renders Typst, Markdown, and LaTeX to PDF in a native macOS window. Read, annotate, review, and quiz yourself on papers without leaving the document.">
+<title>Typeset Viewer — a native macOS reader for Typst, Markdown &amp; LaTeX</title>
+<meta name="description" content="Read and study Typst, Markdown, LaTeX, and PDF documents in a native macOS app with live refresh, notes, explanations, review tools, and paper quizzes.">
 <meta property="og:title" content="Typeset Viewer">
-<meta property="og:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF, with notes, review tools, and source-backed paper quizzes.">
+<meta property="og:description" content="A native macOS reader for Typst, Markdown, LaTeX, and PDF, with notes, explanations, review tools, and paper quizzes.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://typeset.osteele.com/">
 <meta property="og:image" content="https://typeset.osteele.com/assets/og-quiz.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Typeset Viewer">
-<meta name="twitter:description" content="A native macOS viewer for Typst, Markdown, LaTeX, and PDF, with notes, review tools, and source-backed paper quizzes.">
+<meta name="twitter:description" content="A native macOS reader for Typst, Markdown, LaTeX, and PDF, with notes, explanations, review tools, and paper quizzes.">
 <meta name="twitter:image" content="https://typeset.osteele.com/assets/og-quiz.png">
 <style>
   :root {
@@ -222,6 +222,11 @@
   }
   .terminal .prompt { color: var(--accent); }
 
+  .command-line { max-width: var(--full); margin: 1.5rem 0 0; }
+  .command-line summary { cursor: pointer; font-weight: 600; color: var(--fg-soft); }
+  .command-line[open] summary { margin-bottom: .9rem; }
+  .command-line p { font-size: .9rem; }
+
   [id] { scroll-margin-top: 1.2rem; }
 
   code {
@@ -309,9 +314,9 @@
 
   <header>
     <h1>Typeset Viewer</h1>
-    <p class="byline">A native macOS viewer for Typst, Markdown, and LaTeX by <a href="https://osteele.com">Oliver Steele</a></p>
+    <p class="byline">A native macOS reader for Typst, Markdown, LaTeX, and PDF by <a href="https://osteele.com">Oliver Steele</a></p>
 
-    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, or <code>.tex</code> file and read it as a finished PDF that refreshes when you save and keeps your place. Select a passage to look it up, add a note, explain it, or start a source-aware review without leaving the document.</p>
+    <p class="lede">Open a <code>.typ</code>, <code>.md</code>, <code>.tex</code>, or PDF file and read it as a finished document that refreshes when you save and keeps your place. Look up unfamiliar terms, annotate passages, follow references, and turn a paper into questions you can return to.</p>
 
     <p class="get-row">
       <a class="get" href="https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip">Download for macOS</a>
@@ -328,11 +333,11 @@
     <nav class="toc" aria-label="Table of contents">
       <span class="toc-title">Contents</span>
       <ol>
-        <li><a href="#reading">Read and navigate</a></li>
-        <li><a href="#review">Annotate and review</a></li>
+        <li><a href="#reading">Read without losing your place</a></li>
+        <li><a href="#studying">Understand and remember</a></li>
+        <li><a href="#review">Review and revise</a></li>
         <li><a href="#presenting">Present</a></li>
-        <li><a href="#automation">Use it from scripts</a></li>
-        <li><a href="#features">Feature reference</a></li>
+        <li><a href="#features">All features</a></li>
         <li><a href="#installing">Installing</a></li>
         <li><a href="#bugs">Bugs and feedback</a></li>
       </ol>
@@ -352,7 +357,7 @@
   </section>
 
   <section id="reading">
-    <h2>Read and navigate</h2>
+    <h2>Read without losing your place</h2>
 
     <p id="files-rendering">Open a <code>.typ</code>, <code>.md</code>, <code>.tex</code>, or PDF file. Typeset Viewer follows included source and <code>.bib</code> files, renders again when they change, and keeps your reading position. It also restores open documents when you relaunch it.</p>
 
@@ -400,7 +405,9 @@
            alt="An index listing Figure 1 and Table 1 with their captions and page numbers.">
     </figure>
 
-    <p id="navigation">Each window has a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes. All five are available for LaTeX and Typst; Markdown has the first two. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number.</p>
+    <p id="navigation">Each window has a sidebar. It shows page thumbnails, the table of contents, the figures and tables, the works cited, or your notes. All five are available for LaTeX and Typst; Markdown has the first two. The thumbnails are labelled with the heading each page opens on, and the figure list keeps the captions, so you can find a page by what's on it instead of by number. Jump history takes you back after you follow an outline item, reference, note, figure, or proposed change.</p>
+
+    <p id="window-sets">Save a group of document windows and tabs as a window set for a class, paper, or reading project. Open a set alongside the current workspace, switch between sets, or use the keyboard quick switcher to return to one document.</p>
 
     <figure class="mfig">
       <img src="assets/crop-reference.png" width="434" height="118" loading="lazy"
@@ -409,22 +416,11 @@
 
     <p id="references">Each work cited gets links to its Semantic Scholar and arXiv pages, and a count of the places in your paper that cite it. You can add it to a reading list for papers you want to come back to.</p>
 
-    <div class="feature-row visual-left" id="reading-list">
-      <div class="feature-copy">
-        <p>The reading list collects papers added from references, arXiv links, and ordinary paper URLs. Each item keeps its title, authors, abstract, and the document that led you to it. Filter the list, reopen a paper or its citing document, search Semantic Scholar or arXiv, or export the list.</p>
-      </div>
-      <figure>
-        <img src="assets/crop-reading-list.png" width="1120" height="1096" loading="lazy"
-             alt="A reading-list window with three papers, their authors and abstracts, source documents, and links to open or search for each paper.">
-        <figcaption>A synthetic reading list used only for product captures.</figcaption>
-      </figure>
-    </div>
-
     <p>Paste an arXiv or PDF URL to open a paper directly. The app downloads it and keeps a copy.</p>
 
     <div class="feature-row visual-right status-row" id="urls-overleaf">
       <div class="feature-copy">
-        <p>Paste an Overleaf project URL after enabling git for that project. Typeset Viewer keeps a local checkout, builds from it, and reports whether the checkout is synced, ahead, behind, or in conflict. Pull, push, and sync stay explicit commands.</p>
+        <p>Paste an Overleaf project URL after enabling git for that project. Typeset Viewer keeps a local checkout, builds from it, and reports whether it is synced, has local changes, has remote changes, or is in conflict. Pull, push, and sync stay explicit commands.</p>
       </div>
       <figure>
         <img src="assets/crop-overleaf-status.png" width="670" height="64" loading="lazy"
@@ -434,16 +430,16 @@
     </div>
   </section>
 
-  <section id="review">
-    <h2>Annotate and review</h2>
+  <section id="studying">
+    <h2>Understand and remember</h2>
 
-    <figure class="mid">
+    <figure class="mid" id="selection-actions">
       <img src="assets/crop-selection-minibar.png" width="1190" height="340" loading="lazy"
            alt="Selected text in a rendered paper with Add Note, Explain, Review, and more actions above it.">
       <figcaption>The action bar adapts to the selected text.</figcaption>
     </figure>
 
-    <p id="review-agent">Select a word to look it up or search the web. Select a longer passage to add a note, ask for an explanation, or choose a review prompt. The action bar appears after selection and dismisses when you keep reading.</p>
+    <p>Select a word to look it up or search the web. Select a longer passage to add a note, get an explanation, or choose a focused review. The action bar appears after selection and dismisses when you keep reading.</p>
 
     <figure class="mfig">
       <img src="assets/crop-note.png" width="434" height="202" loading="lazy"
@@ -459,25 +455,41 @@
       <figcaption>Because the note stores the text, it survives the next render.</figcaption>
     </figure>
 
-    <div class="feature-row visual-left">
+    <div class="feature-row visual-left" id="reading-list">
       <div class="feature-copy">
-        <p>Built-in review tools can proofread the source, tighten its prose, or check that cited works appear in the bibliography. The document conversation handles open-ended questions about what you are reading. Suggestions come back as cards you accept or reject one at a time, and nothing is written to your file until you say so.<span class="sn-ref"></span><span class="sidenote">Review and document conversation need Claude Code (<code>claude</code>) or Codex (<code>codex</code>) installed. These tools stay off until you choose a backend.</span></p>
+        <p>The reading list collects papers added from references, arXiv links, and ordinary paper URLs. Each item keeps its title, authors, abstract, and the document that led you to it. Filter the list, reopen a paper or its citing document, search Semantic Scholar or arXiv, or export the list.</p>
       </div>
       <figure>
-        <img src="assets/crop-review.png" width="451" height="330" loading="lazy"
-             alt="A review card showing an original passage in red, its proposed replacement in green, and Reject and Accept buttons.">
-        <figcaption>Source text above, proposed replacement below. Nothing changes until you accept it.</figcaption>
+        <img src="assets/crop-reading-list.png" width="1120" height="1096" loading="lazy"
+             alt="A reading-list window with three papers, their authors and abstracts, source documents, and links to open or search for each paper.">
+        <figcaption>Saved papers retain the document and passage that led you to them.</figcaption>
       </figure>
     </div>
 
     <div class="feature-row visual-right" id="paper-quizzes">
       <div class="feature-copy">
-        <p>That panel can become a quiz. It asks a question grounded in the paper and keeps the answer hidden until you're ready. Mark a miss as Forgot, or say whether you recalled it partially, with effort, or easily; each choice shows when the question will return. You can continue the question in the Agent conversation, or jump back to the page and passage that supports it. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
+        <p>Turn a paper into a quiz with questions grounded in the text. Each answer stays hidden until you're ready. Mark a miss as Forgot, or say whether you recalled it partially, with effort, or easily; each choice shows when the question will return. Continue the discussion or jump back to the page and passage that supports the answer. This works for source documents and ordinary PDFs, as long as the PDF has searchable text.</p>
       </div>
       <figure>
         <img src="assets/crop-quiz.png" width="557" height="440" loading="lazy"
-             alt="A revealed paper-quiz answer with a Discuss with Agent button and a compact strip of four recall choices with review intervals.">
-        <figcaption>Reveal the answer, rate your recall, or keep talking with the Agent.</figcaption>
+             alt="A revealed paper-quiz answer with a button to discuss it and a compact strip of four recall choices with review intervals.">
+        <figcaption>Reveal the answer, rate your recall, or continue the discussion.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="review">
+    <h2>Review and revise</h2>
+
+    <div class="feature-row visual-left" id="review-tools">
+      <div class="feature-copy">
+        <p>Choose a focused review to proofread the source, tighten a passage, test an argument, or check that cited works appear in the bibliography. Suggestions come back as cards you accept or reject one at a time. Nothing is written to your file until you say so.</p>
+        <p id="document-conversation">When a preset review is not enough, continue in the document conversation. It carries the passage and its source context into an embedded chat, where you can ask follow-up questions about what you are reading.</p>
+      </div>
+      <figure>
+        <img src="assets/crop-review.png" width="451" height="330" loading="lazy"
+             alt="A review card showing an original passage in red, its proposed replacement in green, and Reject and Accept buttons.">
+        <figcaption>Source text above, proposed replacement below. Nothing changes until you accept it.</figcaption>
       </figure>
     </div>
   </section>
@@ -487,7 +499,7 @@
 
     <div class="feature-row visual-left remote">
       <div class="feature-copy">
-        <p>Presentation mode displays a Beamer, Typst, or PDF talk as slides and provides a phone remote.<span class="sn-ref"></span><span class="sidenote">Presentation mode puts a QR code on the screen. Scan it and your phone becomes the remote: next, previous, a grid of slides to jump from, and a laser pointer that you aim by drawing on the picture of the current slide. Getting a laptop and a phone onto the same network is sometimes its own adventure, particularly through a VPN; if both are running Tailscale, it will use that instead.</span></p>
+        <p>Presentation mode displays a Beamer, Typst, or PDF talk as slides. Scan its QR code and your phone becomes the remote, with next and previous controls, a slide grid, blackout, a laser pointer, and ink.<span class="sn-ref"></span><span class="sidenote">The laptop and phone need a network path to each other. When both are running Tailscale, Typeset Viewer can use that connection instead of the local network.</span></p>
       </div>
       <figure>
         <img src="assets/crop-presentation-remote.png" width="526" height="788" loading="lazy"
@@ -498,13 +510,79 @@
 
   </section>
 
-  <section id="automation">
-    <h2>Use it from scripts</h2>
+  <section id="features">
+    <h2>All features</h2>
 
-    <div class="feature-row visual-left">
-      <div class="feature-copy">
-        <p>The app executable also runs without opening a window. <code>--render</code> builds a Typst, Markdown, or LaTeX source file and prints the PDF path, so a script or CI job can use the same renderer as the app. <code>--doctor</code> prints the app and macOS versions, then the path and version of every compiler and helper it found.</p>
+    <dl class="feature-set">
+      <div>
+        <dt><a href="#files-rendering">Read source files and PDFs</a></dt>
+        <dd>Open Typst, Markdown, LaTeX, and PDF documents in a native reading window.</dd>
       </div>
+      <div>
+        <dt><a href="#refresh-continuity">Stay with the text</a></dt>
+        <dd>Watches source, included files, and <code>.bib</code> files; renders on save; preserves your place; restores open documents.</dd>
+      </div>
+      <div>
+        <dt><a href="#navigation">Find your way</a></dt>
+        <dd>Page thumbnails with headings; table of contents; figures and tables index; works cited; notes sidebar.</dd>
+      </div>
+      <div>
+        <dt><a href="#window-sets">Return to a reading project</a></dt>
+        <dd>Named sets of windows and tabs; restored documents; a keyboard switcher for open documents and saved sets.</dd>
+      </div>
+      <div>
+        <dt><a href="#selection-actions">Understand a passage</a></dt>
+        <dd>Look up a word, search the web, get an explanation, add a note, or choose a focused review from the selected text.</dd>
+      </div>
+      <div>
+        <dt><a href="#notes-output">Keep notes and excerpts</a></dt>
+        <dd>Text-anchored highlights and notes; notes included in exports and printing; draggable title-bar PDF.</dd>
+      </div>
+      <div>
+        <dt><a href="#reading-list">Follow references</a></dt>
+        <dd>Citation counts; Semantic Scholar and arXiv links; a reading list that remembers where each saved paper came from.</dd>
+      </div>
+      <div>
+        <dt><a href="#paper-quizzes">Return to what you learned</a></dt>
+        <dd>Source-backed questions; hidden answers; four recall ratings; scheduled review; links to supporting passages.</dd>
+      </div>
+      <div>
+        <dt><a href="#review-tools">Review and revise</a></dt>
+        <dd>Proofreading, argument checks, citation checks, and source changes accepted or rejected one at a time.</dd>
+      </div>
+      <div>
+        <dt><a href="#document-conversation">Discuss the document</a></dt>
+        <dd>An embedded, context-aware conversation for open-ended questions and follow-ups about the passage you are reading.</dd>
+      </div>
+      <div>
+        <dt><a href="#urls-overleaf">Open papers from elsewhere</a></dt>
+        <dd>Cached PDF URLs; direct arXiv downloads; Overleaf projects with explicit pull, push, and sync.</dd>
+      </div>
+      <div>
+        <dt><a href="#presenting">Present from the document</a></dt>
+        <dd>Page-fit slides; phone remote; slide grid; blackout; laser pointer; ink; previous and next controls.</dd>
+      </div>
+      <div>
+        <dt><a href="#command-line">Use it from scripts</a></dt>
+        <dd>Render a source file to PDF without opening a window, or report the compilers and helper tools available to the app.</dd>
+      </div>
+    </dl>
+
+    <p class="get-row feature-cta">
+      <a class="get" href="https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip">Download for macOS</a>
+      <span class="get-meta">Free · macOS 14 or later · Apple silicon</span>
+    </p>
+  </section>
+
+  <section id="installing">
+    <h2>Installing</h2>
+    <p>Unzip the download and drag <b>Typeset Viewer</b> to your Applications folder. Typst is bundled, so <code>.typ</code> files work immediately.</p>
+    <p>Markdown rendering uses Pandoc.<span class="sn-ref"></span><span class="sidenote"><code>brew install pandoc</code></span> LaTeX rendering uses <code>latexmk</code>.<span class="sn-ref"></span><span class="sidenote">Install MacTeX or the smaller BasicTeX.</span> Overleaf sync uses <code>git</code>. When one of these tools is missing, the app identifies it.</p>
+    <p>Explanations, reviews, new quiz questions, and document conversation require Claude Code or Codex. Reading, notes, references, presentation, and the rest of the app work without either.</p>
+
+    <details class="command-line" id="command-line">
+      <summary>Use Typeset Viewer from scripts</summary>
+      <p>The app executable can run without opening a window. <code>--render</code> builds a Typst, Markdown, or LaTeX source file and prints the PDF path. <code>--doctor</code> reports the app and macOS versions, then the path and version of every compiler and helper it found.</p>
       <pre class="terminal" aria-label="Examples of the render and doctor commands"><span class="prompt">$</span> "/Applications/Typeset Viewer.app/Contents/MacOS/Typeset Viewer" --render paper.typ
 /work/paper.pdf
 
@@ -513,75 +591,14 @@ Typeset Viewer 0.8.0 (build 12)
 Typst: bundled — typst 0.15.0
 Pandoc: /opt/homebrew/bin/pandoc — 3.10.2
 latexmk: /Library/TeX/texbin/latexmk — 4.88</pre>
-    </div>
-  </section>
-
-  <section id="features">
-    <h2>Feature reference</h2>
-
-    <p>This is the compact index. Follow a heading to the explanation and image above.</p>
-
-    <dl class="feature-set">
-      <div>
-        <dt><a href="#files-rendering">Files and rendering</a></dt>
-        <dd>Typst through the bundled <code>typst</code>; Markdown through Pandoc; LaTeX through <code>latexmk</code>; PDFs open directly.</dd>
-      </div>
-      <div>
-        <dt><a href="#refresh-continuity">Refresh and continuity</a></dt>
-        <dd>Watches source, included files, and <code>.bib</code> files; renders on save; preserves your place; restores open documents.</dd>
-      </div>
-      <div>
-        <dt><a href="#navigation">Navigation</a></dt>
-        <dd>Page thumbnails with headings; table of contents; figures and tables index; works cited; notes sidebar.</dd>
-      </div>
-      <div>
-        <dt><a href="#reading-list">References and reading list</a></dt>
-        <dd>Citation counts; Semantic Scholar and arXiv links; saved papers collected from arXiv IDs or URLs.</dd>
-      </div>
-      <div>
-        <dt><a href="#notes-output">Notes and output</a></dt>
-        <dd>Text-anchored highlights and notes; notes included in exports and printing; draggable title-bar PDF.</dd>
-      </div>
-      <div>
-        <dt><a href="#review-agent">Built-in review and agent</a></dt>
-        <dd>Selection actions; document conversation; proofreading, tightening, and citation checks; source changes accepted or rejected one at a time.</dd>
-      </div>
-      <div>
-        <dt><a href="#paper-quizzes">Paper quizzes</a></dt>
-        <dd>Source-backed questions; hidden answers; four recall ratings; scheduled review; links to supporting passages.</dd>
-      </div>
-      <div>
-        <dt><a href="#urls-overleaf">URLs and Overleaf</a></dt>
-        <dd>Cached PDF URLs; direct arXiv downloads; Overleaf projects over git with pull, push, and sync.</dd>
-      </div>
-      <div>
-        <dt><a href="#presenting">Presentation</a></dt>
-        <dd>Page-fit slides; phone remote; slide grid; blackout; laser pointer; ink; previous and next controls.</dd>
-      </div>
-      <div>
-        <dt><a href="#automation">Command-line automation</a></dt>
-        <dd><code>--render</code> turns Typst, Markdown, or LaTeX source into a PDF from a script and prints the output path; <code>--doctor</code> reports the compilers and helper tools the app found, with their paths and versions.</dd>
-      </div>
-    </dl>
-
-    <p class="get-row feature-cta">
-      <a class="get" href="https://github.com/osteele/typeset-viewer/releases/download/v0.8.0/TypesetViewer-0.8.0.zip">Download for macOS</a>
-      <span class="get-meta">Free · macOS 14 or later</span>
-    </p>
-  </section>
-
-  <section id="installing">
-    <h2>Installing</h2>
-    <p>Unzip the download and drag <b>Typeset Viewer</b> to your Applications folder. Typst is bundled, so <code>.typ</code> files work immediately.</p>
-    <p>The other formats use tools you may already have: Markdown needs Pandoc,<span class="sn-ref"></span><span class="sidenote"><code>brew install pandoc</code></span> LaTeX needs <code>latexmk</code>,<span class="sn-ref"></span><span class="sidenote">Install MacTeX or the smaller BasicTeX.</span> and Overleaf sync needs <code>git</code>. The app says so when one is missing, and <code>--doctor</code> prints everything it resolved.</p>
-    <p>It updates itself through <a href="https://sparkle-project.org">Sparkle</a>. You can also use <b>Check for Updates…</b> in the app menu.</p>
+    </details>
   </section>
 
   <section id="bugs">
     <h2>Bugs and feedback</h2>
     <p>This is a one-person project and it is still before 1.0, so expect rough edges. Reports are welcome; I read all of them.</p>
     <p><a href="https://github.com/osteele/typeset-viewer/issues/new?labels=bug">Report a bug</a>, or use <b>Help ▸ Report a Bug…</b> in the app, which fills in your version and environment for you. For anything else, <a href="mailto:steele@osteele.com">email me</a>.</p>
-    <p>Typeset Viewer is free but closed-source. The repository behind this page holds the releases, the issue tracker, and this page itself. The application source is private and stored elsewhere.</p>
+    <p>Typeset Viewer is free, but its application source is not public. The public repository contains releases, the issue tracker, and this website.</p>
   </section>
 
   <footer>
