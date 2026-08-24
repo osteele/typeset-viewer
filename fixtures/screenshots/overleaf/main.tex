@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\definecolor{accent}{HTML}{315F8C}
+
+\title{Adaptive Quadrature}
+\author{Mira Chen \and Daniel Okafor}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Error estimates}
+
+Adaptive quadrature concentrates evaluations where the estimated error is
+largest. The source remains an ordinary \LaTeX{} project while the rendered
+paper stays open beside the editor.
+
+\subsection{Stopping rule}
+
+For intervals $I_k$, stop when
+\[
+  \sum_k \lvert E_k \rvert < \varepsilon.
+\]
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lrr}
+    \toprule
+    Rule & Evaluations & Error \\
+    \midrule
+    Simpson & 129 & $2.1\times10^{-6}$ \\
+    Gauss--Kronrod & 73 & $8.4\times10^{-8}$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Two adaptive rules on the same tolerance.}
+\end{table}
+
+\end{document}
